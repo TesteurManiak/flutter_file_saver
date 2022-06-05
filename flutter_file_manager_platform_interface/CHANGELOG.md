@@ -1,3 +1,7 @@
+## 1.0.2
+
+* Use `PlatformInterface` for the base `FileManagerPlatform` class
+
 ## 1.0.1
 
 * Changed method `writeFile` to `writeFileAsString`
