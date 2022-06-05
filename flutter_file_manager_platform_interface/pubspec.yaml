@@ -1,6 +1,6 @@
 name: flutter_file_manager_platform_interface
 description: A common platform interface for the flutter_file_manager plugin.
-version: 1.0.0
+version: 1.0.1
 homepage: https://github.com/TesteurManiak/flutter_file_manager
 repository: https://github.com/TesteurManiak/flutter_file_manager/tree/main/flutter_file_manager_platform_interface
 
