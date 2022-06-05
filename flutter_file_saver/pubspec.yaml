@@ -1,6 +1,6 @@
 name: flutter_file_saver
 description: Interface to provide a way to save files on the device in Flutter.
-version: 0.1.0
+version: 0.1.1
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/flutter_file_saver
 

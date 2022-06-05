@@ -2,7 +2,6 @@ import 'dart:io' as io;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
-import 'package:flutter_file_manager_web/flutter_file_manager_web.dart';
 
 class FlutterFileSaver {
   static bool _manualRegistrationNeeded = true;
@@ -18,10 +17,7 @@ class FlutterFileSaver {
 
   static FileManagerPlatform get _platform {
     if (_manualRegistrationNeeded) {
-      if (kIsWeb &&
-          FileManagerPlatform.instance is FileManagerPlatformException) {
-        FileManagerPlatform.instance = FlutterFileManagerWeb();
-      } else if (!kIsWeb &&
+      if (!kIsWeb &&
           FileManagerPlatform.instance is FileManagerPlatformException) {
         if (io.Platform.isAndroid) {
           // FileManagerPlatform.instance = FlutterFileSaverAndroid();
