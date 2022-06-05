@@ -22,3 +22,25 @@ In your `android/app/src/main/AndroidManifest.xml`, add the `WRITE_EXTERNAL_STOR
     </application>
 </manifest>
 ```
+
+### iOS
+
+Add the following permissions to your `ios/Runner/Info.plist`:
+
+```xml
+<key>UISupportsDocumentBrowser</key>
+<true/>
+<key>UIFileSharingEnabled</key>
+<true/>
+<key>LSSupportsOpeningDocumentsInPlace</key>
+<true/>
+```
+
+### MacOS
+
+Add the following permissions to your `macOS/Runner/DebugProfile.entitlements`:
+
+```xml
+<key>com.apple.security.files.user-selected.read-write</key>
+<true/>
+```
