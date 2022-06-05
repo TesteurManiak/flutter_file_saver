@@ -1,9 +1,9 @@
 # flutter_file_manager_platform_interface
 
-![Pub Version](https://img.shields.io/pub/v/flutter_file_manager_platform_interface)
+[![Pub Version](https://img.shields.io/pub/v/flutter_file_manager_platform_interface)](https://pub.dev/packages/flutter_file_manager_platform_interface)
 
-A common platform interface for the flutter_file_manager plugin
+A common platform interface for the [flutter_file_saver](https://pub.dev/packages/flutter_file_saver) plugin
 
 ## Usage
 
-This package is already included as part of the `flutter_file_manager` package dependency, and will be included when using `flutter_file_manager` as normal.
+This package is already included as part of the [flutter_file_saver](https://pub.dev/packages/flutter_file_saver) package dependency, and will be included when using [flutter_file_saver](https://pub.dev/packages/flutter_file_saver) as normal.
