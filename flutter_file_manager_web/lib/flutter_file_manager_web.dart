@@ -14,21 +14,33 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
   @override
   Future<String> writeFile({
     required String fileName,
-    required String data,
+    required Uint8List bytes,
     MimeType? type,
   }) async {
-    final bytes = utf8.encode(data);
     final splittedName = fileName.split('.');
     final name = splittedName[0];
     final mimeType = type ?? splittedName[1].toMimeType();
 
     final downloaded = await _downloadFile(
-      bytes: Uint8List.fromList(bytes),
+      bytes: bytes,
       name: name,
       type: mimeType,
     );
 
     return downloaded ? 'Downloads/$fileName' : '';
+  }
+
+  @override
+  Future<String> writeFileAsString({
+    required String fileName,
+    required String data,
+    MimeType? type,
+  }) async {
+    return writeFile(
+      fileName: fileName,
+      bytes: Uint8List.fromList(utf8.encode(data)),
+      type: type,
+    );
   }
 
   Future<bool> _downloadFile({
