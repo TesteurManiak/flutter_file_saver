@@ -1,6 +1,6 @@
 name: flutter_file_saver
 description: Interface to provide a way to save files on the device in Flutter.
-version: 0.2.0
+version: 0.2.1
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/flutter_file_saver
 
@@ -11,11 +11,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_file_manager_android: ^1.0.0
-  flutter_file_manager_platform_interface: ^1.0.1
-  flutter_file_manager_web: ^1.0.1
-  path_provider: ^2.0.10
-  permission_handler: ^9.2.0
+  flutter_file_manager_android: ^1.0.1
+  flutter_file_manager_platform_interface: ^1.0.2
+  flutter_file_manager_web: ^1.0.2
 
 dev_dependencies:
   flutter_test:
@@ -26,7 +24,6 @@ flutter:
   plugin:
     platforms:
       android:
-        package: com.maniak.flutter_file_manager_android
-        pluginClass: FlutterFileManagerAndroidPlugin
+        default_package: flutter_file_manager_android
       web:
         default_package: flutter_file_manager_web
