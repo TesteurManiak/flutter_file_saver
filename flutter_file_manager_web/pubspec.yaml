@@ -1,6 +1,6 @@
 name: flutter_file_manager_web
 description: Web platform implementation of flutter_file_manager.
-version: 1.0.1
+version: 1.0.2
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/flutter_file_manager_web
 
@@ -14,7 +14,6 @@ dependencies:
   flutter_file_manager_platform_interface: ^1.0.1
   flutter_web_plugins:
     sdk: flutter
-  plugin_platform_interface: ^2.0.2
 
 dev_dependencies:
   flutter_test:

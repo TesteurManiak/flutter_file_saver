@@ -1,9 +1,22 @@
 import 'dart:typed_data';
 
+import 'package:plugin_platform_interface/plugin_platform_interface.dart';
+
 import 'mime_type.dart';
 
-abstract class FileManagerPlatform {
-  static FileManagerPlatform instance = FileManagerPlatformException();
+abstract class FileManagerPlatform extends PlatformInterface {
+  FileManagerPlatform() : super(token: _token);
+
+  static FileManagerPlatform _instance = FileManagerPlatformException();
+
+  static FileManagerPlatform get instance => _instance;
+
+  static set instance(FileManagerPlatform value) {
+    PlatformInterface.verifyToken(instance, _token);
+    _instance = value;
+  }
+
+  static final Object _token = Object();
 
   /// Write [data] inside [fileName] and return the path to the file.
   ///
