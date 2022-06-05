@@ -1,5 +1,7 @@
 # flutter_file_manager_platform_interface
 
+![Pub Version](https://img.shields.io/pub/v/flutter_file_manager_platform_interface)
+
 A common platform interface for the flutter_file_manager plugin
 
 ## Usage
