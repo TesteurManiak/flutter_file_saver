@@ -2,6 +2,7 @@ import 'dart:io' as io;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_android/flutter_file_manager_android.dart';
+import 'package:flutter_file_manager_ios/flutter_file_manager_ios.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
 
 class FlutterFileSaver {
@@ -23,7 +24,7 @@ class FlutterFileSaver {
         if (io.Platform.isAndroid) {
           FileManagerPlatform.instance = FlutterFileManagerAndroid();
         } else if (io.Platform.isIOS) {
-          // FileManagerPlatform.instance = FileManagerIOS();
+          FileManagerPlatform.instance = FlutterFileManagerIos();
         }
       }
       _manualRegistrationNeeded = false;

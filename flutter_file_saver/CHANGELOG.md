@@ -1,3 +1,7 @@
+## 0.3.0
+
+* Added support for iOS with [flutter_file_manager_ios](https://pub.dev/packages/flutter_file_manager_ios)
+
 ## 0.2.1
 
 * Fixed Android build issues.
