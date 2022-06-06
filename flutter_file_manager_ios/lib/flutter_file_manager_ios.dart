@@ -1,7 +1,9 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
+import 'package:path_provider/path_provider.dart';
 
 class FlutterFileManagerIos extends FileManagerPlatform {
   @override
@@ -10,7 +12,17 @@ class FlutterFileManagerIos extends FileManagerPlatform {
     required Uint8List bytes,
     MimeType? type,
   }) async {
-    return '';
+    // To find the file in the document folder I had to also set
+    // `UISupportsDocumentBrowser`, `UIFileSharingEnabled` and
+    // `LSSupportsOpeningDocumentsInPlace` to `YES` in the
+    // `ios/Runner/info.plist`.
+    final appDocumentsDirectory = await getApplicationDocumentsDirectory();
+    final appDocumentsPath = appDocumentsDirectory.path;
+    final filePath = '$appDocumentsPath/$fileName';
+
+    final file = File(filePath);
+    await file.writeAsBytes(bytes);
+    return filePath;
   }
 
   @override
