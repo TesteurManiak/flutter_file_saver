@@ -82,42 +82,42 @@ packages:
       name: flutter_file_manager_android
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.1"
+    version: "1.1.0"
   flutter_file_manager_ios:
     dependency: transitive
     description:
       name: flutter_file_manager_ios
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   flutter_file_manager_macos:
     dependency: transitive
     description:
       name: flutter_file_manager_macos
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.0"
+    version: "1.1.0"
   flutter_file_manager_platform_interface:
     dependency: transitive
     description:
       name: flutter_file_manager_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
   flutter_file_manager_web:
     dependency: transitive
     description:
       name: flutter_file_manager_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.2"
+    version: "1.1.0"
   flutter_file_saver:
     dependency: "direct main"
     description:
       path: ".."
       relative: true
     source: path
-    version: "0.4.0"
+    version: "0.5.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -170,6 +170,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
+  mime:
+    dependency: transitive
+    description:
+      name: mime
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
   path:
     dependency: transitive
     description:

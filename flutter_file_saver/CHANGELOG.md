@@ -1,3 +1,8 @@
+## 0.5.0
+
+* Upgraded platform dependencies to version `1.1.0`
+* Removed reference to `MimeType`
+
 ## 0.4.0
 
 * Added support for MacOS with [flutter_file_manager_macos](https://pub.dev/packages/flutter_file_manager_macos)
