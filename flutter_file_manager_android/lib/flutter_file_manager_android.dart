@@ -1,25 +1,31 @@
 import 'dart:convert';
-import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
-import 'package:path_provider/path_provider.dart';
+import 'package:mime/mime.dart';
 import 'package:permission_handler/permission_handler.dart';
 
 class FlutterFileManagerAndroid extends FileManagerPlatform {
+  @visibleForTesting
+  final methodChannel = const MethodChannel('flutter_file_manager_android');
+
   @override
   Future<String> writeFile({
     required String fileName,
     required Uint8List bytes,
   }) async {
     if (await _requestPermission(Permission.storage)) {
-      final appDocumentsDirectory = await getExternalStorageDirectory();
-      final appDocumentsPath = appDocumentsDirectory!.path;
-      final filePath = '$appDocumentsPath/$fileName';
-
-      final file = File(filePath);
-      await file.writeAsBytes(bytes);
-      return filePath;
+      final path = await methodChannel.invokeMethod<String>(
+        'writeFile',
+        <String, dynamic>{
+          'name': fileName,
+          'bytes': bytes,
+          'type': lookupMimeType(fileName)
+        },
+      );
+      return path ?? 'Unknown';
     } else {
       throw Exception('Permission denied');
     }
