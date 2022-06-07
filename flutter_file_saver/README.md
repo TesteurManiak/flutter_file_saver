@@ -17,7 +17,7 @@ In your `android/app/src/main/AndroidManifest.xml`, add the `WRITE_EXTERNAL_STOR
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
 
-    <application android:requestLegacyExternalStorage="true" android:label="MyApp" android:name="${applicationName}" android:icon="@mipmap/ic_launcher">
+    <application android:requestLegacyExternalStorage="true" android:label="MyApp" android:name="${applicationName}">
         <!-- ... -->
     </application>
 </manifest>
@@ -38,7 +38,7 @@ Add the following permissions to your `ios/Runner/Info.plist`:
 
 ### MacOS
 
-Add the following permissions to your `macOS/Runner/DebugProfile.entitlements`:
+Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
 ```xml
 <key>com.apple.security.files.user-selected.read-write</key>

@@ -32,26 +32,29 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: Form(
           key: _formKey,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              TextFormField(
-                initialValue: 'test',
-                decoration: const InputDecoration(labelText: 'File name'),
-                validator: (value) => value != null && value.isNotEmpty
-                    ? null
-                    : 'File name is required',
-                onSaved: (val) => _fileName = val,
-              ),
-              TextFormField(
-                initialValue: 'test',
-                decoration: const InputDecoration(labelText: 'File content'),
-                validator: (value) => value != null && value.isNotEmpty
-                    ? null
-                    : 'File content is required',
-                onSaved: (val) => _fileContent = val,
-              ),
-            ],
+          child: Padding(
+            padding: const EdgeInsets.all(16),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                TextFormField(
+                  initialValue: 'test',
+                  decoration: const InputDecoration(labelText: 'File name'),
+                  validator: (value) => value != null && value.isNotEmpty
+                      ? null
+                      : 'File name is required',
+                  onSaved: (val) => _fileName = val,
+                ),
+                TextFormField(
+                  initialValue: 'test',
+                  decoration: const InputDecoration(labelText: 'File content'),
+                  validator: (value) => value != null && value.isNotEmpty
+                      ? null
+                      : 'File content is required',
+                  onSaved: (val) => _fileContent = val,
+                ),
+              ],
+            ),
           ),
         ),
       ),
