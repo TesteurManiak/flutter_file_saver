@@ -44,3 +44,11 @@ Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 <key>com.apple.security.files.user-selected.read-write</key>
 <true/>
 ```
+
+## TODO
+
+* Use method channel on Android to save the file in the download folder
+* Support for Windows & Linux
+* Support custom paths
+* Improve documentation
+* Add tests

@@ -1,6 +1,12 @@
+## 0.4.0
+
+* Added support for MacOS with [flutter_file_manager_macos](https://pub.dev/packages/flutter_file_manager_macos)
+* Added method `writeFileAsBytes`
+
 ## 0.3.0
 
 * Added support for iOS with [flutter_file_manager_ios](https://pub.dev/packages/flutter_file_manager_ios)
+* Added `example/` project
 
 ## 0.2.1
 
