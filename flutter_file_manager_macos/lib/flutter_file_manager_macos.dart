@@ -15,7 +15,6 @@ class FlutterFileManagerMacos extends FileManagerPlatform {
   Future<String> writeFile({
     required String fileName,
     required Uint8List bytes,
-    MimeType? type,
   }) async {
     /// [String] & [Uint8List] are supported by Swift method channel.
     /// https://docs.flutter.dev/development/platform-integration/platform-channels?tab=type-mappings-swift-tab
@@ -33,11 +32,9 @@ class FlutterFileManagerMacos extends FileManagerPlatform {
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
-    MimeType? type,
   }) =>
       writeFile(
         fileName: fileName,
         bytes: Uint8List.fromList(utf8.encode(data)),
-        type: type,
       );
 }

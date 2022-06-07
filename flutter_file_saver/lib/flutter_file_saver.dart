@@ -36,17 +36,7 @@ class FlutterFileSaver {
     return FileManagerPlatform.instance;
   }
 
-  /// Write [data] inside [fileName] and return the path to the file. The
-  /// parameter is only used on web.
-  ///
-  /// {@template flutterFileSaver.web.mimeType}
-  /// ### Web only
-  ///
-  /// The parameter [type] is only used to define the encoding type of the
-  /// created file.
-  /// If it is `null`, type will be infered from the [fileName] (e.g:
-  /// `test.json` will infer the [MimeType.json]).
-  /// {@endtemplate}
+  /// Write [data] inside [fileName] and return the path to the file.
   ///
   /// {@template flutterFileSaver.macos.openFinder}
   /// ### MacOS only
@@ -57,28 +47,21 @@ class FlutterFileSaver {
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
-    MimeType? type,
   }) =>
       _platform.writeFileAsString(
         fileName: fileName,
         data: data,
-        type: type,
       );
 
-  /// Write [bytes] inside [fileName] and return the path to the file. The
-  /// parameter is only used on web.
-  ///
-  /// {@macro flutterFileSaver.web.mimeType}
+  /// Write [bytes] inside [fileName] and return the path to the file.
   ///
   /// {@macro flutterFileSaver.macos.openFinder}
   Future<String> writeFileAsBytes({
     required String fileName,
     required Uint8List bytes,
-    MimeType? type,
   }) =>
       _platform.writeFile(
         fileName: fileName,
         bytes: bytes,
-        type: type,
       );
 }
