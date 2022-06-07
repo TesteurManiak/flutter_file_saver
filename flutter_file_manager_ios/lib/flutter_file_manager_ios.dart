@@ -10,7 +10,6 @@ class FlutterFileManagerIos extends FileManagerPlatform {
   Future<String> writeFile({
     required String fileName,
     required Uint8List bytes,
-    MimeType? type,
   }) async {
     // To find the file in the document folder I had to also set
     // `UISupportsDocumentBrowser`, `UIFileSharingEnabled` and
@@ -29,11 +28,9 @@ class FlutterFileManagerIos extends FileManagerPlatform {
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
-    MimeType? type,
   }) =>
       writeFile(
         fileName: fileName,
         bytes: Uint8List.fromList(utf8.encode(data)),
-        type: type,
       );
 }
