@@ -4,11 +4,28 @@
 
 Interface to provide a way to save files on the device in Flutter.
 
+## Platform Support
+
+| | Android | iOS | Web | Windows | Linux | MacOS |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| `writeFileAsBytes` | ✅ | ✅ | ✅  | ❌️ | ❌️ | ✅ |
+| `writeFileAsString` | ✅ | ✅ | ✅  | ❌️ | ❌️ | ✅ |
+
 ## Setup
+
+### Import the package
+
+```yaml
+dependencies:
+    flutter_file_saver: any
+```
 
 ### Android
 
-In your `android/app/src/main/AndroidManifest.xml`, add the `WRITE_EXTERNAL_STORAGE`, `MANAGE_EXTERNAL_STORAGE` permissions and the `android:requestLegacyExternalStorage="true"`:
+In your `android/app/src/main/AndroidManifest.xml`, add:
+* `WRITE_EXTERNAL_STORAGE`,
+* `MANAGE_EXTERNAL_STORAGE`,
+* `android:requestLegacyExternalStorage="true"`
 
 ```xml
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.my_app">
@@ -23,6 +40,10 @@ In your `android/app/src/main/AndroidManifest.xml`, add the `WRITE_EXTERNAL_STOR
 </manifest>
 ```
 
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/android/app/src/main/AndroidManifest.xml)
+
+**Permission request is managed by the package.**
+
 ### iOS
 
 Add the following permissions to your `ios/Runner/Info.plist`:
@@ -36,7 +57,11 @@ Add the following permissions to your `ios/Runner/Info.plist`:
 <true/>
 ```
 
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/ios/Runner/Info.plist)
+
 ### MacOS
+
+**Need at least MacOS 10.9**
 
 Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
@@ -45,10 +70,10 @@ Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 <true/>
 ```
 
-## TODO
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/macos/Runner/DebugProfile.entitlements)
+
+## Todo
 
 * Use method channel on Android to save the file in the download folder
 * Support for Windows & Linux
-* Support custom paths
-* Improve documentation
-* Add tests
+* Support custom local paths
