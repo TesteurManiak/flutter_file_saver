@@ -17,15 +17,21 @@ public class FlutterFileManagerMacosPlugin: NSObject, FlutterPlugin {
         }
     }
     
-    func handleWriteFile(_ result: FlutterResult, _ call: FlutterMethodCall) {
+    func handleWriteFile(_ result: @escaping FlutterResult, _ call: FlutterMethodCall) {
         if let args = call.arguments as? Dictionary<String, Any>,
            let name = args["name"] as? String,
            let flutterBytes = args["bytes"] as? FlutterStandardTypedData {
             let data = Data(flutterBytes.data)
             let _ = [UInt8](data)
-            result(name)
+            if #available(macOS 10.12, *) {
+                let tmpUrl = FileManager.default.temporaryDirectory
+                let fileUrl = tmpUrl.appendingPathComponent(name)
+                result(fileUrl)
+            } else {
+                result(FlutterError.init(code: "2", message: "Not available on MacOs version older than 10.12", details: nil))
+            }
         } else {
-            result(FlutterError.init(code: "Bad arguments", message: nil, details: nil))
+            result(FlutterError.init(code: "1", message: "Bad arguments", details: nil))
         }
     }
 }
