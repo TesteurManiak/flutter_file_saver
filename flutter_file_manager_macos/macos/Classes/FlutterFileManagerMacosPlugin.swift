@@ -20,7 +20,9 @@ public class FlutterFileManagerMacosPlugin: NSObject, FlutterPlugin {
     func handleWriteFile(_ result: FlutterResult, _ call: FlutterMethodCall) {
         if let args = call.arguments as? Dictionary<String, Any>,
            let name = args["name"] as? String,
-           let bytes = args["bytes"] as? FlutterStandardTypedData(bytes: Data) {
+           let flutterBytes = args["bytes"] as? FlutterStandardTypedData {
+            let data = Data(flutterBytes.data)
+            let _ = [UInt8](data)
             result(name)
         } else {
             result(FlutterError.init(code: "Bad arguments", message: nil, details: nil))
