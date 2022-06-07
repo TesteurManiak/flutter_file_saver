@@ -17,8 +17,8 @@ class FlutterFileManagerMacos extends FileManagerPlatform {
     required Uint8List bytes,
     MimeType? type,
   }) async {
-    /// [String] & [Uint8List] are supported by Obj-C method channel.
-    /// https://docs.flutter.dev/development/platform-integration/platform-channels?tab=type-mappings-obj-c-tab
+    /// [String] & [Uint8List] are supported by Swift method channel.
+    /// https://docs.flutter.dev/development/platform-integration/platform-channels?tab=type-mappings-swift-tab
     final path = await methodChannel.invokeMethod<String>(
       'writeFile',
       <String, dynamic>{
