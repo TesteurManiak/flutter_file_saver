@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Removed `MimeType` enum
+
 ## 1.0.2
 
 * Use `PlatformInterface` for the base `FileManagerPlatform` class
