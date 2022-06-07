@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
@@ -8,9 +11,33 @@ class FlutterFileManagerMacos extends FileManagerPlatform {
   @visibleForTesting
   final methodChannel = const MethodChannel('flutter_file_manager_macos');
 
-  Future<String?> getPlatformVersion() async {
-    final version =
-        await methodChannel.invokeMethod<String>('getPlatformVersion');
-    return version;
+  @override
+  Future<String> writeFile({
+    required String fileName,
+    required Uint8List bytes,
+    MimeType? type,
+  }) async {
+    /// [String] & [Uint8List] are supported by Obj-C method channel.
+    /// https://docs.flutter.dev/development/platform-integration/platform-channels?tab=type-mappings-obj-c-tab
+    final path = await methodChannel.invokeMethod<String>(
+      'writeFile',
+      <String, dynamic>{
+        'name': fileName,
+        'bytes': bytes,
+      },
+    );
+    return path!;
   }
+
+  @override
+  Future<String> writeFileAsString({
+    required String fileName,
+    required String data,
+    MimeType? type,
+  }) =>
+      writeFile(
+        fileName: fileName,
+        bytes: Uint8List.fromList(utf8.encode(data)),
+        type: type,
+      );
 }
