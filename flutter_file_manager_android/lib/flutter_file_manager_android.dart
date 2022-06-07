@@ -11,7 +11,6 @@ class FlutterFileManagerAndroid extends FileManagerPlatform {
   Future<String> writeFile({
     required String fileName,
     required Uint8List bytes,
-    MimeType? type,
   }) async {
     if (await _requestPermission(Permission.storage)) {
       final appDocumentsDirectory = await getExternalStorageDirectory();
@@ -30,12 +29,10 @@ class FlutterFileManagerAndroid extends FileManagerPlatform {
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
-    MimeType? type,
   }) {
     return writeFile(
       fileName: fileName,
       bytes: Uint8List.fromList(utf8.encode(data)),
-      type: type,
     );
   }
 
