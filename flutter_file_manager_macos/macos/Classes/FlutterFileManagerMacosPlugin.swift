@@ -21,17 +21,26 @@ public class FlutterFileManagerMacosPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? Dictionary<String, Any>,
            let name = args["name"] as? String,
            let flutterBytes = args["bytes"] as? FlutterStandardTypedData {
-            let data = Data(flutterBytes.data)
-            let _ = [UInt8](data)
             if #available(macOS 10.12, *) {
-                let tmpUrl = FileManager.default.temporaryDirectory
-                let fileUrl = tmpUrl.appendingPathComponent(name)
-                result(fileUrl)
+                let data = Data(flutterBytes.data)
+                let fileUrl = getDocumentsDirectory().appendingPathComponent(name)
+                do {
+                    try data.write(to: fileUrl)
+                    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: getDocumentsDirectory().path)
+                    result(fileUrl.description)
+                } catch {
+                    result(FlutterError.init(code: "3", message: "Error while writing file \(name)", details: nil))
+                }
             } else {
                 result(FlutterError.init(code: "2", message: "Not available on MacOs version older than 10.12", details: nil))
             }
         } else {
             result(FlutterError.init(code: "1", message: "Bad arguments", details: nil))
         }
+    }
+    
+    func getDocumentsDirectory() -> URL {
+        let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+        return paths[0]
     }
 }
