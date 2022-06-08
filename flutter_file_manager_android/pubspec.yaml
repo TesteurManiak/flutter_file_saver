@@ -1,6 +1,6 @@
 name: flutter_file_manager_android
-description: Android platform implementation of flutter_file_manager.
-version: 1.1.0
+description: Android platform implementation of flutter_file_saver.
+version: 1.1.1
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/flutter_file_manager_android
 
