@@ -20,7 +20,7 @@ dependencies:
     flutter_file_saver: any
 ```
 
-### Android
+### Android (Only for Android 10 and above)
 
 In your `android/app/src/main/AndroidManifest.xml`, add:
 * `WRITE_EXTERNAL_STORAGE`,
@@ -59,9 +59,7 @@ Add the following permissions to your `ios/Runner/Info.plist`:
 
 [Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/ios/Runner/Info.plist)
 
-### MacOS
-
-**Need at least MacOS 10.9**
+### MacOS (Only for MacOS 10.9 and above)
 
 Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
@@ -74,6 +72,5 @@ Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
 ## Todo
 
-* Use method channel on Android to save the file in the download folder
 * Support for Windows & Linux
 * Support custom local paths

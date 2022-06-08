@@ -7,11 +7,21 @@ import 'package:flutter_file_manager_ios/flutter_file_manager_ios.dart';
 import 'package:flutter_file_manager_macos/flutter_file_manager_macos.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
 
+/// Allows to write files to the device's file system.
+///
+/// {@template flutter_file_saver.paths}
+/// Files are saved in the following locations:
+/// - Android: Device's external downloads directory.
+/// - iOS: Application's Documents directory.
+/// - MacOS: Applications's Documents directory.
+/// - Web: Browser's downloads directory.
+/// {@endtemplate}
 class FlutterFileSaver {
   static bool _manualRegistrationNeeded = true;
 
   FlutterFileSaver._();
 
+  /// Constructs a singleton instance of [FlutterFileSaver].
   factory FlutterFileSaver() {
     _singleton ??= FlutterFileSaver._();
     return _singleton!;
@@ -38,6 +48,8 @@ class FlutterFileSaver {
 
   /// Write [data] inside [fileName] and return the path to the file.
   ///
+  /// {@macro flutter_file_saver.paths}
+  ///
   /// {@template flutterFileSaver.macos.openFinder}
   /// ### MacOS only
   ///
@@ -54,6 +66,8 @@ class FlutterFileSaver {
       );
 
   /// Write [bytes] inside [fileName] and return the path to the file.
+  ///
+  /// {@macro flutter_file_saver.paths}
   ///
   /// {@macro flutterFileSaver.macos.openFinder}
   Future<String> writeFileAsBytes({

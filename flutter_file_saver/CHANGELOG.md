@@ -1,3 +1,8 @@
+## 0.5.1
+
+* Upgraded `flutter_file_manager_android` to `1.1.1` to save file in download folder
+* Improved documentation
+
 ## 0.5.0
 
 * Upgraded platform dependencies to version `1.1.0`
