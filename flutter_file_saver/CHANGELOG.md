@@ -1,3 +1,8 @@
+## 0.6.0
+
+* Upgraded `flutter_file_manager_android` to `1.2.0+1` to save file using the native dialog
+* Updated documentation
+
 ## 0.5.1
 
 * Upgraded `flutter_file_manager_android` to `1.1.1` to save file in download folder

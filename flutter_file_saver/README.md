@@ -20,29 +20,17 @@ dependencies:
     flutter_file_saver: any
 ```
 
-### Android (Only for Android 10 and above)
+### Android
 
-In your `android/app/src/main/AndroidManifest.xml`, add:
-* `WRITE_EXTERNAL_STORAGE`,
-* `MANAGE_EXTERNAL_STORAGE`,
-* `android:requestLegacyExternalStorage="true"`
-
-```xml
-<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.example.my_app">
-    <!-- ... -->
-
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-
-    <application android:requestLegacyExternalStorage="true" android:label="MyApp" android:name="${applicationName}">
-        <!-- ... -->
-    </application>
-</manifest>
+```gradle
+android {
+    defaultConfig {
+        minSdkVersion 19
+    }
+}
 ```
 
-[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/android/app/src/main/AndroidManifest.xml)
-
-**Permission request is managed by the package.**
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/android/app/build.gradle)
 
 ### iOS
 

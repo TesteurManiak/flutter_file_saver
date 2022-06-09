@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_file_manager_android: ^1.2.0
+  flutter_file_manager_android: ^1.2.0+1
   flutter_file_manager_ios: ^1.1.0
   flutter_file_manager_macos: ^1.1.0
   flutter_file_manager_platform_interface: ^1.1.0
