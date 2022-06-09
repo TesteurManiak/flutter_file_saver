@@ -1,30 +1,26 @@
 package com.maniak.flutter_file_manager_android
 
-import android.content.ContentValues
 import android.content.Context
 import android.os.Build
-import android.os.Environment
-import android.provider.MediaStore
 import androidx.annotation.NonNull
 import androidx.annotation.RequiresApi
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
+import io.flutter.embedding.engine.plugins.activity.ActivityAware
+import io.flutter.embedding.engine.plugins.activity.ActivityPluginBinding
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
-import java.io.OutputStream
 
 /** FlutterFileManagerAndroidPlugin */
 @RequiresApi(Build.VERSION_CODES.Q)
-class FlutterFileManagerAndroidPlugin: FlutterPlugin, MethodCallHandler {
-  /// The MethodChannel that will the communication between Flutter and native Android
-  ///
-  /// This local reference serves to register the plugin with the Flutter Engine and unregister it
-  /// when the Flutter Engine is detached from the Activity
+class FlutterFileManagerAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var channel : MethodChannel
-
   private lateinit var context: Context
+
+  private var activityBinding: ActivityPluginBinding? = null
+  private var fileDialog: FileDialog?  = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
     context = flutterPluginBinding.applicationContext
@@ -33,11 +29,21 @@ class FlutterFileManagerAndroidPlugin: FlutterPlugin, MethodCallHandler {
   }
 
   override fun onMethodCall(@NonNull call: MethodCall, @NonNull result: Result) {
+    if (fileDialog == null) {
+      if (!createFileDialog()) {
+        result.error("init_failed", "Not attached", null)
+        return
+      }
+    }
+
     if (call.method == "writeFile") {
+      val sourceFilePath = call.argument<String>("sourceFilePath")
       val name = call.argument<String>("name")
       val bytes = call.argument<ByteArray>("bytes")
-      val mimeType = call.argument<String>("type")
-      handleWriteFile(result, name, bytes, mimeType)
+      val mimeTypesFilter = call.argument<List<String>>("types")?.toTypedArray()
+      val localOnly = call.argument<Boolean>("localOnly")
+
+      handleWriteFile(result, sourceFilePath, bytes, name, mimeTypesFilter, localOnly)
     } else {
       result.notImplemented()
     }
@@ -49,25 +55,53 @@ class FlutterFileManagerAndroidPlugin: FlutterPlugin, MethodCallHandler {
 
   private fun handleWriteFile(
           @NonNull result: Result,
-          fileName: String?,
+          sourceFilePath: String?,
           bytes: ByteArray?,
-          mimeType: String?,
+          fileName: String?,
+          mimeTypesFilter: Array<String>?,
+          localOnly: Boolean?
   ) {
-    val contentValues = ContentValues().apply {
-      put(MediaStore.MediaColumns.DISPLAY_NAME, fileName)
-      put(MediaStore.MediaColumns.MIME_TYPE, mimeType)
-      put(MediaStore.MediaColumns.RELATIVE_PATH, Environment.DIRECTORY_DOWNLOADS)
+    fileDialog!!.saveFile(
+            result,
+            sourceFilePath,
+            bytes,
+            fileName,
+            mimeTypesFilter,
+            localOnly == true
+    )
+  }
+
+  override fun onAttachedToActivity(binding: ActivityPluginBinding) {
+    activityBinding = binding
+  }
+
+  override fun onDetachedFromActivityForConfigChanges() {
+    doOnDetachedFromActivity()
+  }
+
+  override fun onReattachedToActivityForConfigChanges(binding: ActivityPluginBinding) {
+    activityBinding = binding
+  }
+
+  override fun onDetachedFromActivity() {
+    doOnDetachedFromActivity()
+  }
+
+  private fun doOnDetachedFromActivity() {
+    if (fileDialog != null) {
+      activityBinding?.removeActivityResultListener(fileDialog!!)
+      fileDialog = null
     }
-    val resolver = context.applicationContext.contentResolver
-    val uri = resolver.insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI, contentValues)
-    if (uri != null) {
-      val os: OutputStream? = uri.let { resolver.openOutputStream(it) }
-      os?.write(bytes)
-      os?.flush()
-      os?.close()
-      result.success(uri.encodedPath)
-    } else {
-      result.error("1", "Did not find uri", null)
+    activityBinding = null
+  }
+
+  private fun createFileDialog(): Boolean {
+    var fileDialog: FileDialog? = null
+    if (activityBinding != null) {
+      fileDialog = FileDialog(activity = activityBinding!!.activity)
+      activityBinding!!.addActivityResultListener(fileDialog)
     }
+    this.fileDialog = fileDialog
+    return fileDialog != null
   }
 }
