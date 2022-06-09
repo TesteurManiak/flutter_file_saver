@@ -1,3 +1,7 @@
+## 1.2.0+1
+
+* Removed required api Android Q from native code
+
 ## 1.2.0
 
 **Minimal API level: 19**

@@ -1,9 +1,7 @@
 package com.maniak.flutter_file_manager_android
 
 import android.content.Context
-import android.os.Build
 import androidx.annotation.NonNull
-import androidx.annotation.RequiresApi
 
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -14,7 +12,6 @@ import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
 /** FlutterFileManagerAndroidPlugin */
-@RequiresApi(Build.VERSION_CODES.Q)
 class FlutterFileManagerAndroidPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var channel : MethodChannel
   private lateinit var context: Context
