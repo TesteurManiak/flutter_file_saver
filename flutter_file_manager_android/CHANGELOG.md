@@ -1,3 +1,10 @@
+## 1.2.0
+
+**Minimal API level: 19**
+
+* Use native Android file dialog
+* Removed dependency to `permission_handler` (No permission required anymore)
+
 ## 1.1.1
 
 * Call to native API to save file in the download folder
