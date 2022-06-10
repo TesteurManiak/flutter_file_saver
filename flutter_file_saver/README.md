@@ -23,47 +23,47 @@ dependencies:
 ### Platform Setup
 
 <details>
-    <summary>Android Setup</summary>
+<summary>Android Setup</summary>
 
-    ```gradle
-    android {
-        defaultConfig {
-            minSdkVersion 19
-        }
+```gradle
+android {
+    defaultConfig {
+        minSdkVersion 19
     }
-    ```
+}
+```
 
-    [Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/android/app/build.gradle)
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/android/app/build.gradle)
 </details>
 
 <details>
-    <summary>iOS Setup</summary>
+<summary>iOS Setup</summary>
 
-    Add the following permissions to your `ios/Runner/Info.plist`:
+Add the following permissions to your `ios/Runner/Info.plist`:
 
-    ```xml
-    <key>UISupportsDocumentBrowser</key>
-    <true/>
-    <key>UIFileSharingEnabled</key>
-    <true/>
-    <key>LSSupportsOpeningDocumentsInPlace</key>
-    <true/>
-    ```
+```xml
+<key>UISupportsDocumentBrowser</key>
+<true/>
+<key>UIFileSharingEnabled</key>
+<true/>
+<key>LSSupportsOpeningDocumentsInPlace</key>
+<true/>
+```
 
-    [Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/ios/Runner/Info.plist)
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/ios/Runner/Info.plist)
 </details>
 
 <details>
-    <summary>MacOS Setup</summary>
+<summary>MacOS Setup</summary>
 
-    Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
+Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
-    ```xml
-    <key>com.apple.security.files.user-selected.read-write</key>
-    <true/>
-    ```
+```xml
+<key>com.apple.security.files.user-selected.read-write</key>
+<true/>
+```
 
-    [Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/macos/Runner/DebugProfile.entitlements)
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/macos/Runner/DebugProfile.entitlements)
 </details>
 
 ## Methods
