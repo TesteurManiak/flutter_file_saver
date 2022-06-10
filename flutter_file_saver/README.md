@@ -47,7 +47,7 @@ Add the following permissions to your `ios/Runner/Info.plist`:
 
 [Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/ios/Runner/Info.plist)
 
-### MacOS (Only for MacOS 10.9 and above)
+### MacOS (required MacOS 10.9 or above)
 
 Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
@@ -57,6 +57,30 @@ Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 ```
 
 [Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/macos/Runner/DebugProfile.entitlements)
+
+## Methods
+
+### `writeFileAsBytes`
+
+Write a file on the device from a `Uint8List`.
+
+```dart
+FlutterFileSaver().writeFileAsBytes(
+    fileName: 'file.txt',
+    bytes: fileBytes,
+);
+```
+
+### `writeFileAsString`
+
+Write a file on the device from a `String`. This will most of the time convert your data and perform a call to `writeFileAsBytes`.
+
+```dart
+FlutterFileSaver().writeFileAsString(
+    fileName: 'file.txt',
+    string: 'Hello World!',
+);
+```
 
 ## Todo
 
