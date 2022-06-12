@@ -22,6 +22,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
+  plugin_platform_interface: ^2.1.2
 
 flutter:
   plugin:

@@ -15,3 +15,9 @@ scripts:
     description: Run `flutter test` for a specific package.
     select-package:
       dir-exists: "test"
+
+  coverage:
+    run: melos exec -- "flutter test --coverage"
+    description: Run `flutter test --coverage` for a specific package.
+    select-package:
+      dir-exists: "test"
