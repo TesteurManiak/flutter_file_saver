@@ -1,7 +1,8 @@
-## 0.6.0+1
+## 0.6.1
 
 * Setup [melos](https://pub.dev/packages/melos)
 * Improved documentation
+* Added `setFileSaverInstance` method to help testing
 
 ## 0.6.0
 
