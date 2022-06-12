@@ -1,5 +1,6 @@
 # flutter_file_saver
 
+[![melos](https://img.shields.io/badge/maintained%20with-melos-f700ff.svg)](https://github.com/invertase/melos)
 [![Pub Version](https://img.shields.io/pub/v/flutter_file_saver)](https://pub.dev/packages/flutter_file_saver)
 
 Interface to provide a way to save files on the device in Flutter.
