@@ -5,7 +5,7 @@ packages:
 
 scripts:
   analyze:
-    run: melos exec -- "flutter analyze --fatal-infos"
+    run: melos exec -- "flutter analyze --no-fatal-infos"
     description: |
       Run `flutter analyze` in all packages.
         - Note: you can also rely on your IDEs Dart Analysis / Issues window.
@@ -15,6 +15,3 @@ scripts:
     description: Run `flutter test` for a specific package.
     select-package:
       dir-exists: "test"
-
-  format:
-    run: melos exec -- dart format -o write .

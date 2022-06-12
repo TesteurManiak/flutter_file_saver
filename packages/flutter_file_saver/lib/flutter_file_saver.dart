@@ -7,6 +7,9 @@ import 'package:flutter_file_manager_ios/flutter_file_manager_ios.dart';
 import 'package:flutter_file_manager_macos/flutter_file_manager_macos.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
 
+export 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart'
+    show FileManagerPlatform;
+
 /// Allows to write files to the device's file system.
 ///
 /// {@template flutter_file_saver.paths}
@@ -44,6 +47,12 @@ class FlutterFileSaver {
       _manualRegistrationNeeded = false;
     }
     return FileManagerPlatform.instance;
+  }
+
+  ///  Allows you to mock the [FileManagerPlatform] instance for testing.
+  @visibleForTesting
+  void setFileSaverInstance(FileManagerPlatform platform) {
+    FileManagerPlatform.instance = platform;
   }
 
   /// Write [data] inside [fileName] and return the path to the file.

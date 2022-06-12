@@ -77,39 +77,39 @@ packages:
     source: sdk
     version: "0.0.0"
   flutter_file_manager_android:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../flutter_file_manager_android"
-      relative: true
-    source: path
+      name: flutter_file_manager_android
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.2.0+1"
   flutter_file_manager_ios:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../flutter_file_manager_ios"
-      relative: true
-    source: path
+      name: flutter_file_manager_ios
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.1.0"
   flutter_file_manager_macos:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../flutter_file_manager_macos"
-      relative: true
-    source: path
+      name: flutter_file_manager_macos
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.1.0"
   flutter_file_manager_platform_interface:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../flutter_file_manager_platform_interface"
-      relative: true
-    source: path
+      name: flutter_file_manager_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.1.0"
   flutter_file_manager_web:
-    dependency: "direct overridden"
+    dependency: transitive
     description:
-      path: "../../flutter_file_manager_web"
-      relative: true
-    source: path
+      name: flutter_file_manager_web
+      url: "https://pub.dartlang.org"
+    source: hosted
     version: "1.1.0"
   flutter_file_saver:
     dependency: "direct main"
@@ -117,7 +117,7 @@ packages:
       path: ".."
       relative: true
     source: path
-    version: "0.6.0"
+    version: "0.6.0+1"
   flutter_lints:
     dependency: "direct dev"
     description:
