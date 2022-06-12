@@ -1,0 +1,20 @@
+name: flutter_file_saver
+
+packages:
+  - packages/**
+
+scripts:
+  analyze:
+    run: melos exec -- "flutter analyze --fatal-infos"
+    description: |
+      Run `flutter analyze` in all packages.
+        - Note: you can also rely on your IDEs Dart Analysis / Issues window.
+
+  test:
+    run: melos exec -- "flutter test"
+    description: Run `flutter test` for a specific package.
+    select-package:
+      dir-exists: "test"
+
+  format:
+    run: melos exec -- dart format -o write .
