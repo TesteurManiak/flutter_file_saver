@@ -1,3 +1,7 @@
+## 0.6.1+1
+
+* Fixed repository link
+
 ## 0.6.1
 
 * Setup [melos](https://pub.dev/packages/melos)
