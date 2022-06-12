@@ -1,3 +1,8 @@
+## 0.6.0+1
+
+* Setup [melos](https://pub.dev/packages/melos)
+* Improved documentation
+
 ## 0.6.0
 
 * Upgraded `flutter_file_manager_android` to `1.2.0+1` to save file using the native dialog
