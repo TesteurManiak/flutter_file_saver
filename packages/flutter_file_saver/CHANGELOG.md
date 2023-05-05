@@ -1,3 +1,8 @@
+## 0.6.2
+
+* Fixed pub score
+* Upgraded dependencies
+
 ## 0.6.1+1
 
 * Fixed repository link

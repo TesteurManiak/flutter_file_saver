@@ -1,3 +1,8 @@
+## 1.2.1
+
+* Fixed pub score
+* Upgraded dependencies
+
 ## 1.2.0+1
 
 * Removed required api Android Q from native code
