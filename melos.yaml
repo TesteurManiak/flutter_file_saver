@@ -3,6 +3,9 @@ name: flutter_file_saver
 packages:
   - packages/**
 
+ide:
+  intellij: false
+
 scripts:
   analyze:
     run: melos exec -- "flutter analyze --no-fatal-infos"
@@ -13,11 +16,13 @@ scripts:
   test:
     run: melos exec -- "flutter test"
     description: Run `flutter test` for a specific package.
-    select-package:
-      dir-exists: "test"
+    packageFilters:
+      dirExists:
+        - test
 
   coverage:
     run: melos exec -- "flutter test --coverage"
     description: Run `flutter test --coverage` for a specific package.
-    select-package:
-      dir-exists: "test"
+    packageFilters:
+      dirExists:
+        - test

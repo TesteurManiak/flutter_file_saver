@@ -6,7 +6,7 @@
 .packages
 .pub/
 .dart_tool/
-pubspec.lock
+packages/**/pubspec.lock
 flutter_export_environment.sh
 coverage/
 
@@ -46,3 +46,5 @@ build/
 .project
 .classpath
 .settings
+
+pubspec_overrides.yaml
