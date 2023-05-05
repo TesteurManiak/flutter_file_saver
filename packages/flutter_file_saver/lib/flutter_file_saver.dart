@@ -1,5 +1,4 @@
 import 'dart:io' as io;
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_android/flutter_file_manager_android.dart';
