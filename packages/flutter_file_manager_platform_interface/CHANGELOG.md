@@ -1,3 +1,8 @@
+## 1.1.1
+
+* Fixed pub score
+* Upgraded dependencies
+
 ## 1.1.0
 
 * Removed `MimeType` enum

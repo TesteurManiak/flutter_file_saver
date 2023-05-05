@@ -1,3 +1,8 @@
+## 1.1.1
+
+* Fixed pub score
+* Upgraded dependencies
+
 ## 1.1.0
 
 * Upgraded [flutter_file_manager_platform_interface](https://pub.dev/packages/flutter_file_manager_platform_interface) to version `1.1.0`

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'dart:html' as html;
-import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
