@@ -18,11 +18,11 @@ dependencies:
   flutter_file_manager_web: ^1.1.0
 
 dev_dependencies:
-  flutter_lints: ^2.0.0
+  flutter_lints: ^2.0.1
   flutter_test:
     sdk: flutter
   mocktail: ^0.3.0
-  plugin_platform_interface: ^2.1.2
+  plugin_platform_interface: ^2.1.4
 
 flutter:
   plugin:
