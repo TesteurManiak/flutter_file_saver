@@ -59,10 +59,8 @@ class FlutterFileSaver {
   /// {@macro flutter_file_saver.paths}
   ///
   /// {@template flutterFileSaver.macos.openFinder}
-  /// ### MacOS only
-  ///
-  /// This method will also open the finder pointing to the folder
-  /// containing the file.
+  /// **MacOS only**: This method will also open the finder pointing to the
+  /// folder containing the file.
   /// {@endtemplate}
   Future<String> writeFileAsString({
     required String fileName,

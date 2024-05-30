@@ -34,7 +34,7 @@ android {
 }
 ```
 
-[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/android/app/build.gradle)
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/packages/flutter_file_saver/example/android/app/build.gradle#L45-L54)
 </details>
 
 <details>
@@ -51,7 +51,7 @@ Add the following permissions to your `ios/Runner/Info.plist`:
 <true/>
 ```
 
-[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/ios/Runner/Info.plist)
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/packages/flutter_file_saver/example/ios/Runner/Info.plist#L48-L53)
 </details>
 
 <details>
@@ -64,7 +64,7 @@ Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 <true/>
 ```
 
-[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/flutter_file_saver/example/macos/Runner/DebugProfile.entitlements)
+[Check example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/packages/flutter_file_saver/example/macos/Runner/DebugProfile.entitlements#L11-L12)
 </details>
 
 ## Methods
