@@ -1,3 +1,9 @@
+## 0.7.0
+
+* Bumped Dart SDK to `3.4.0` and Flutter SDK to `3.22.0`
+* Updated dependencies
+* Compatible with WASM
+
 ## 0.6.2
 
 * Fixed pub score
