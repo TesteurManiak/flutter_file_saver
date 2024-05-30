@@ -1,6 +1,6 @@
 name: flutter_file_manager_android
 description: Android platform implementation of flutter_file_saver.
-version: 2.0.0
+version: 2.0.0+1
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/packages/flutter_file_manager_android
 issue_tracker: https://github.com/TesteurManiak/flutter_file_saver/issues?q=is%3Aissue+is%3Aopen+label%3Aandroid
@@ -11,7 +11,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_file_manager_platform_interface: ^1.1.1
+  flutter_file_manager_platform_interface: ^2.0.0
   mime: ^1.0.5
 
 dev_dependencies:

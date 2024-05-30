@@ -1,3 +1,7 @@
+## 2.0.0+1
+
+* Fixed transitive dependency issue
+
 ## 2.0.0
 
 * Migrated implementation to wasm
