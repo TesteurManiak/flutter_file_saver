@@ -1,3 +1,7 @@
+## 2.0.0
+
+* Bumped Dart SDK to `3.4.0` and Flutter SDK to `3.22.0`
+
 ## 1.1.1
 
 * Fixed pub score
