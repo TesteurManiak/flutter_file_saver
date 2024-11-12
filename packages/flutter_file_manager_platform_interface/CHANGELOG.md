@@ -1,6 +1,6 @@
 ## 2.1.0
 
-* Added exceptions `FileSaverException`, `FileSaverCancelledException` & `FileSaverFailedException`
+* Added exceptions `FileSaverException` & `FileSaverCancelledException`
 
 ## 2.0.0
 
