@@ -4,7 +4,7 @@ import 'package:flutter_file_saver/flutter_file_saver.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -70,14 +70,22 @@ class _MyHomePageState extends State<MyHomePage> {
     final formState = _formKey.currentState!;
     if (formState.validate()) {
       formState.save();
-      final path = await _fileSaverPlugin.writeFileAsString(
-        fileName: '$_fileName.txt',
-        data: _fileContent!,
-      );
-      if (!mounted) return;
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('File saved to $path')),
-      );
+
+      try {
+        final path = await _fileSaverPlugin.writeFileAsString(
+          fileName: '$_fileName.txt',
+          data: _fileContent!,
+        );
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('File saved to $path')),
+        );
+      } on FileSaverCancelledException {
+        if (!mounted) return;
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Save cancelled')),
+        );
+      }
     }
   }
 }

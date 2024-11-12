@@ -1,3 +1,7 @@
+## 2.1.0
+
+* Use native file save dialog on MacOS
+
 ## 2.0.0+1
 
 * Fixed transitive dependency issue

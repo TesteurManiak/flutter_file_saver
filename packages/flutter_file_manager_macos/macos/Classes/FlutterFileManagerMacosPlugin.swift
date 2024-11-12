@@ -21,21 +21,23 @@ public class FlutterFileManagerMacosPlugin: NSObject, FlutterPlugin {
         if let args = call.arguments as? Dictionary<String, Any>,
            let name = args["name"] as? String,
            let flutterBytes = args["bytes"] as? FlutterStandardTypedData {
-            if #available(macOS 10.12, *) {
-                let data = Data(flutterBytes.data)
-                let fileUrl = getDocumentsDirectory().appendingPathComponent(name)
-                do {
-                    try data.write(to: fileUrl)
-                    NSWorkspace.shared.selectFile(nil, inFileViewerRootedAtPath: getDocumentsDirectory().path)
-                    result(fileUrl.description)
-                } catch {
-                    result(FlutterError.init(code: "3", message: "Error while writing file \(name)", details: nil))
+            let savePanel = NSSavePanel()
+            savePanel.nameFieldStringValue = name
+            savePanel.begin { (saveResult) in
+                guard saveResult == .OK, let path = savePanel.url else {
+                    result(FlutterError.init(code: "CANCELLED", message: nil, details: nil))
+                    return
                 }
-            } else {
-                result(FlutterError.init(code: "2", message: "Not available on MacOs version older than 10.12", details: nil))
+                
+                do {
+                    let content = Data(flutterBytes.data)
+                    try content.write(to: path)
+                } catch {
+                    result(FlutterError.init(code: "FAILED", message: "Error while writing file \(name)", details: error.localizedDescription))
+                }
             }
         } else {
-            result(FlutterError.init(code: "1", message: "Bad arguments", details: nil))
+            result(FlutterError.init(code: "BAD_ARGS", message: "Bad arguments", details: nil))
         }
     }
     

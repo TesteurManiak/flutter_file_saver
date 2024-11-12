@@ -1,3 +1,7 @@
+## 2.1.0
+
+* Added exceptions `FileSaverException` & `FileSaverCancelledException`
+
 ## 2.0.0
 
 * Bumped Dart SDK to `3.4.0`

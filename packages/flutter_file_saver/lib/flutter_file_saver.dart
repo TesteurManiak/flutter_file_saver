@@ -7,7 +7,7 @@ import 'package:flutter_file_manager_macos/flutter_file_manager_macos.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
 
 export 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart'
-    show FileManagerPlatform;
+    show FileManagerPlatform, FileSaverException, FileSaverCancelledException;
 
 /// Allows to write files to the device's file system.
 ///
