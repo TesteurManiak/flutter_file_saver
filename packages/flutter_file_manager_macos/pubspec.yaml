@@ -1,6 +1,6 @@
 name: flutter_file_manager_macos
 description: MacOS platform implementation of flutter_file_saver.
-version: 2.0.0+1
+version: 2.1.0
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/packages/flutter_file_manager_macos
 issue_tracker: https://github.com/TesteurManiak/flutter_file_saver/issues?q=is%3Aissue+is%3Aopen+label%3AmacOS
@@ -15,7 +15,7 @@ dependencies:
   flutter_file_manager_platform_interface: ^2.0.0
 
 dev_dependencies:
-  flutter_lints: ^4.0.0
+  flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
 
