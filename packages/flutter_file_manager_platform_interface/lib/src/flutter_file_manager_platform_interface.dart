@@ -1,4 +1,4 @@
-library flutter_file_manager_platform_interface;
+library;
 
 import 'dart:typed_data';
 
