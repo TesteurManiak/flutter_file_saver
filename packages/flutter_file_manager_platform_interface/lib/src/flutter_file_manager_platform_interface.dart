@@ -1,5 +1,6 @@
 library;
 
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -26,7 +27,10 @@ abstract class FileManagerPlatform extends PlatformInterface {
     required String fileName,
     required String data,
   }) {
-    throw UnimplementedError('writeFile() has not been implemented.');
+    return writeFile(
+      fileName: fileName,
+      bytes: Uint8List.fromList(utf8.encode(data)),
+    );
   }
 
   /// Write [bytes] inside [fileName] and return the path to the file.

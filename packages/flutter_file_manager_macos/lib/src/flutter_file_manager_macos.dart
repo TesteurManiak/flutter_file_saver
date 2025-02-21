@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
@@ -34,14 +32,4 @@ class FlutterFileManagerMacos extends FileManagerPlatform {
       }
     }
   }
-
-  @override
-  Future<String> writeFileAsString({
-    required String fileName,
-    required String data,
-  }) =>
-      writeFile(
-        fileName: fileName,
-        bytes: Uint8List.fromList(utf8.encode(data)),
-      );
 }

@@ -1,13 +1,13 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
 import 'package:mime/mime.dart';
 
+import 'src/gen/method_channel_messages.dart';
+
 class FlutterFileManagerAndroid extends FileManagerPlatform {
   @visibleForTesting
-  final methodChannel = const MethodChannel('flutter_file_manager_android');
+  final api = AndroidMessageApi();
 
   @override
   Future<String> writeFile({
@@ -15,27 +15,25 @@ class FlutterFileManagerAndroid extends FileManagerPlatform {
     required Uint8List bytes,
   }) async {
     final mimeType = lookupMimeType(fileName);
-    final path = await methodChannel.invokeMethod<String>(
-      'writeFile',
-      <String, dynamic>{
-        'sourceFilePath': null, // TODO: support this param
-        'name': fileName,
-        'bytes': bytes,
-        'types': mimeType != null ? <String>[mimeType] : null,
-        'localOnly': false, // TODO: support this param
-      },
-    );
-    return path ?? 'Unknown';
-  }
-
-  @override
-  Future<String> writeFileAsString({
-    required String fileName,
-    required String data,
-  }) {
-    return writeFile(
-      fileName: fileName,
-      bytes: Uint8List.fromList(utf8.encode(data)),
-    );
+    try {
+      final path = await api.writeFile(
+        fileName: fileName,
+        mimeType: mimeType,
+        bytes: bytes,
+      );
+      return path;
+    } on PlatformException catch (e, s) {
+      switch (e.code) {
+        case FileSaverErrorCode.cancelled:
+          throw FileSaverCancelledException();
+        default:
+          throw FileSaverException(
+            code: e.code,
+            message: e.message,
+            details: e.details,
+            stacktrace: s.toString(),
+          );
+      }
+    }
   }
 }
