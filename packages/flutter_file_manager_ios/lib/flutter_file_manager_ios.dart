@@ -1,11 +1,17 @@
-import 'dart:convert';
-import 'dart:io';
-import 'dart:typed_data';
+library;
 
+import 'dart:io';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
 import 'package:path_provider/path_provider.dart';
 
+import 'src/gen/method_channel_messages.dart';
+
 class FlutterFileManagerIos extends FileManagerPlatform {
+  @visibleForTesting
+  final api = IOSMessageApi();
+
   @override
   Future<String> writeFile({
     required String fileName,
@@ -23,14 +29,4 @@ class FlutterFileManagerIos extends FileManagerPlatform {
     await file.writeAsBytes(bytes);
     return filePath;
   }
-
-  @override
-  Future<String> writeFileAsString({
-    required String fileName,
-    required String data,
-  }) =>
-      writeFile(
-        fileName: fileName,
-        bytes: Uint8List.fromList(utf8.encode(data)),
-      );
 }
