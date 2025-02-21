@@ -25,6 +25,8 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 
 android {
+    namespace 'com.maniak.flutter_file_manager_android'
+    
     compileSdkVersion 34
 
     compileOptions {

@@ -12,12 +12,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_file_manager_platform_interface: ^2.1.0
+  flutter_file_manager_platform_interface: ^2.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
+  pigeon: ^24.2.1
 
 flutter:
   plugin:

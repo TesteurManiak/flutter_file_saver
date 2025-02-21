@@ -1,5 +1,6 @@
 library;
 
+import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
@@ -22,11 +23,17 @@ abstract class FileManagerPlatform extends PlatformInterface {
   ///
   /// - `fileName`: The name of the file (e.g: `my_file.json`).
   /// - `data`: The data to write inside the file.
+  ///
+  /// This effectively encode the [data] to UTF-8 and perform a call to
+  /// [writeFile].
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
   }) {
-    throw UnimplementedError('writeFile() has not been implemented.');
+    return writeFile(
+      fileName: fileName,
+      bytes: Uint8List.fromList(utf8.encode(data)),
+    );
   }
 
   /// Write [bytes] inside [fileName] and return the path to the file.
