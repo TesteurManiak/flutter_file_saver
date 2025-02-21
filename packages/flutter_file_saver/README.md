@@ -69,7 +69,7 @@ Add the following permissions to your `macos/Runner/DebugProfile.entitlements`:
 
 ## Methods
 
-### `writeFileAsBytes`
+### `writeFile`
 
 Write a file on the device from a `Uint8List`.
 
@@ -82,7 +82,7 @@ FlutterFileSaver().writeFileAsBytes(
 
 ### `writeFileAsString`
 
-Write a file on the device from a `String`. This will most of the time convert your data and perform a call to `writeFileAsBytes`.
+Write a file on the device from a `String`. This will most of the time convert your data and perform a call to `writeFile`.
 
 ```dart
 FlutterFileSaver().writeFileAsString(
