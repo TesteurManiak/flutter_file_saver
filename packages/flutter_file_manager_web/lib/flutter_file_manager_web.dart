@@ -1,5 +1,5 @@
-import 'dart:convert';
 import 'dart:js_interop' as js;
+import 'dart:js_interop_unsafe';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
@@ -21,31 +21,27 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     final name = splittedName[0];
     final mimeType = lookupMimeType(fileName) ?? 'application/octet-stream';
 
-    await _downloadFile(bytes: bytes, name: name, type: mimeType);
+    if (_isFileSystemAccessAPIAvailable()) {
+      await _showSaveFilePicker(bytes: bytes, name: name, mimeType: mimeType);
+    }
+
+    await _downloadFile(bytes: bytes, name: name, mimeType: mimeType);
 
     return '';
   }
 
-  @override
-  Future<String> writeFileAsString({
-    required String fileName,
-    required String data,
-  }) async {
-    return writeFile(
-      fileName: fileName,
-      bytes: Uint8List.fromList(utf8.encode(data)),
-    );
-  }
-
+  /// Downloads the file using the browser's download API.
+  ///
+  /// Works on all browsers.
   Future<void> _downloadFile({
     required Uint8List bytes,
     required String name,
-    required String type,
+    required String mimeType,
   }) async {
     final url = web.URL.createObjectURL(
       web.Blob(
         [bytes.toJS].toJS,
-        web.BlobPropertyBag(type: type),
+        web.BlobPropertyBag(type: mimeType),
       ),
     );
     final htmlDocument = web.document;
@@ -53,9 +49,69 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     anchor.href = url;
     anchor.style.display = name;
     anchor.download = name;
-    anchor.type = type;
+    anchor.type = mimeType;
     web.document.body?.children.add(anchor);
     anchor.click();
     web.document.body?.removeChild(anchor);
   }
+
+  /// Relies on the browser's File System Access API to save the file using the
+  /// JavaScript `showSaveFilePicker` method.
+  ///
+  /// Works only on modern browsers.
+  Future<void> _showSaveFilePicker({
+    required Uint8List bytes,
+    required String name,
+    required String mimeType,
+  }) async {
+    final window = js.globalContext;
+
+    final fileExtension = name.split('.').lastOrNull;
+    if (fileExtension == null) {
+      throw FlutterFileManagerWebException('Missing file extension.');
+    }
+
+    final options = {
+      'suggestedName': name,
+      'types': [
+        {
+          'description': 'Selected File',
+          'accept': {
+            mimeType: ['.$fileExtension'],
+          },
+        },
+      ],
+    }.toJSBox;
+
+    try {
+      final fileHandle = await window.callMethodVarArgs<js.JSPromise>(
+        'showSaveFilePicker'.toJS,
+        [options],
+      ).toDart;
+
+      print('RESULT: $fileHandle');
+    } on web.DOMException catch (e) {
+      // Convert an abort error to a custom exception.
+      if (e case web.DOMException(code: 20, name: 'AbortError')) {
+        throw FileSaverCancelledException();
+      }
+      rethrow;
+    }
+  }
+
+  /// Check the availability of the File System Access API by checking if the
+  /// `showSaveFilePicker` method is available in the global context.
+  bool _isFileSystemAccessAPIAvailable() {
+    final window = js.globalContext;
+    return window.hasProperty('showSaveFilePicker'.toJS).toDart;
+  }
+}
+
+class FlutterFileManagerWebException implements Exception {
+  const FlutterFileManagerWebException(this.message);
+
+  final String message;
+
+  @override
+  String toString() => 'FlutterFileManagerWebException: $message';
 }
