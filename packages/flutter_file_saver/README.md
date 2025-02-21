@@ -90,8 +90,3 @@ FlutterFileSaver().writeFileAsString(
     string: 'Hello World!',
 );
 ```
-
-## Todo
-
-* Support for Windows & Linux
-* Support custom local paths
