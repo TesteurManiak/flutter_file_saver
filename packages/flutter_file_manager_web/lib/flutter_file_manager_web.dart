@@ -21,13 +21,9 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     final name = splittedName[0];
     final mimeType = lookupMimeType(fileName) ?? 'application/octet-stream';
 
-    final downloaded = await _downloadFile(
-      bytes: bytes,
-      name: name,
-      type: mimeType,
-    );
+    await _downloadFile(bytes: bytes, name: name, type: mimeType);
 
-    return downloaded ? 'Downloads/$fileName' : '';
+    return '';
   }
 
   @override
@@ -41,31 +37,25 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     );
   }
 
-  Future<bool> _downloadFile({
+  Future<void> _downloadFile({
     required Uint8List bytes,
     required String name,
     required String type,
   }) async {
-    try {
-      final url = web.URL.createObjectURL(
-        web.Blob(
-          [bytes.toJS].toJS,
-          web.BlobPropertyBag(type: type),
-        ),
-      );
-      final htmlDocument = web.document;
-      final anchor = htmlDocument.createElement('a') as web.HTMLAnchorElement;
-      anchor.href = url;
-      anchor.style.display = name;
-      anchor.download = name;
-      anchor.type = type;
-      web.document.body?.children.add(anchor);
-      anchor.click();
-      web.document.body?.removeChild(anchor);
-      return true;
-    } catch (e) {
-      debugPrint(e.toString());
-      return false;
-    }
+    final url = web.URL.createObjectURL(
+      web.Blob(
+        [bytes.toJS].toJS,
+        web.BlobPropertyBag(type: type),
+      ),
+    );
+    final htmlDocument = web.document;
+    final anchor = htmlDocument.createElement('a') as web.HTMLAnchorElement;
+    anchor.href = url;
+    anchor.style.display = name;
+    anchor.download = name;
+    anchor.type = type;
+    web.document.body?.children.add(anchor);
+    anchor.click();
+    web.document.body?.removeChild(anchor);
   }
 }
