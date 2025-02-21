@@ -1,3 +1,8 @@
+## 2.1.0
+
+* Bumped `flutter_file_manager_platform_interface` to `2.1.0`
+* Use [`showSaveFilePicker`](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker) on browsers that support it
+
 ## 2.0.0+1
 
 * Fixed transitive dependency issue
