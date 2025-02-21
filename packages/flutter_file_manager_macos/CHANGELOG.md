@@ -1,6 +1,8 @@
 ## 2.1.0
 
+* Bumped `flutter_file_manager_platform_interface` to `2.1.0`
 * Use native file save dialog on MacOS
+* Refactor the code using [pigeon](https://pub.dev/packages/pigeon) to communicate with the native code
 
 ## 2.0.0+1
 
