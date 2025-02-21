@@ -10,14 +10,6 @@ export 'package:flutter_file_manager_platform_interface/flutter_file_manager_pla
     show FileManagerPlatform, FileSaverException, FileSaverCancelledException;
 
 /// Allows to write files to the device's file system.
-///
-/// {@template flutter_file_saver.paths}
-/// Files are saved in the following locations:
-/// - Android: Device's external downloads directory.
-/// - iOS: Application's Documents directory.
-/// - MacOS: Applications's Documents directory.
-/// - Web: Browser's downloads directory.
-/// {@endtemplate}
 class FlutterFileSaver {
   static bool _manualRegistrationNeeded = true;
 
@@ -54,14 +46,8 @@ class FlutterFileSaver {
     FileManagerPlatform.instance = platform;
   }
 
-  /// Write [data] inside [fileName] and return the path to the file.
-  ///
-  /// {@macro flutter_file_saver.paths}
-  ///
-  /// {@template flutterFileSaver.macos.openFinder}
-  /// **MacOS only**: This method will also open the finder pointing to the
-  /// folder containing the file.
-  /// {@endtemplate}
+  /// Write [data] inside [fileName] and return the path to the file (except for
+  /// web where it will returns an empty string if successful).
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
@@ -71,11 +57,8 @@ class FlutterFileSaver {
         data: data,
       );
 
-  /// Write [bytes] inside [fileName] and return the path to the file.
-  ///
-  /// {@macro flutter_file_saver.paths}
-  ///
-  /// {@macro flutterFileSaver.macos.openFinder}
+  /// Write [bytes] inside [fileName] and return the path to the file (except
+  /// for web where it will returns an empty string if successful).
   Future<String> writeFileAsBytes({
     required String fileName,
     required Uint8List bytes,
