@@ -1,6 +1,7 @@
 ## 2.1.0
 
 * Added exceptions `FileSaverException` & `FileSaverCancelledException`
+* Pre-implement `writeFileAsString` for all platforms
 
 ## 2.0.0
 

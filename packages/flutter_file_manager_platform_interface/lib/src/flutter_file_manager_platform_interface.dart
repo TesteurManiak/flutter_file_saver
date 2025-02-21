@@ -23,6 +23,9 @@ abstract class FileManagerPlatform extends PlatformInterface {
   ///
   /// - `fileName`: The name of the file (e.g: `my_file.json`).
   /// - `data`: The data to write inside the file.
+  ///
+  /// This effectively encode the [data] to UTF-8 and perform a call to
+  /// [writeFile].
   Future<String> writeFileAsString({
     required String fileName,
     required String data,
