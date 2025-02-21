@@ -38,7 +38,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 TextFormField(
-                  initialValue: 'test',
+                  initialValue: 'test.txt',
                   decoration: const InputDecoration(labelText: 'File name'),
                   validator: (value) => value != null && value.isNotEmpty
                       ? null
@@ -73,7 +73,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
       try {
         final path = await _fileSaverPlugin.writeFileAsString(
-          fileName: '$_fileName.txt',
+          fileName: _fileName!,
           data: _fileContent!,
         );
         if (!mounted) return;

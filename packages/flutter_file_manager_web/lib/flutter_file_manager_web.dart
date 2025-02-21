@@ -1,3 +1,5 @@
+library;
+
 import 'dart:js_interop' as js;
 import 'dart:js_interop_unsafe';
 
@@ -6,6 +8,11 @@ import 'package:flutter_file_manager_platform_interface/flutter_file_manager_pla
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:mime/mime.dart';
 import 'package:web/web.dart' as web;
+
+import 'src/save_file_picker.dart';
+import 'src/writable.dart';
+
+export 'src/exceptions.dart';
 
 class FlutterFileManagerWeb extends FileManagerPlatform {
   static void registerWith(Registrar registrar) {
@@ -22,11 +29,16 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     final mimeType = lookupMimeType(fileName) ?? 'application/octet-stream';
 
     if (_isFileSystemAccessAPIAvailable()) {
-      await _showSaveFilePicker(bytes: bytes, name: name, mimeType: mimeType);
+      await _showSaveFilePicker(
+        bytes: bytes,
+        name: name,
+        fileExtension: splittedName.length > 1 ? splittedName[1] : null,
+        mimeType: mimeType,
+      );
+      return '';
     }
 
     await _downloadFile(bytes: bytes, name: name, mimeType: mimeType);
-
     return '';
   }
 
@@ -62,34 +74,29 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
   Future<void> _showSaveFilePicker({
     required Uint8List bytes,
     required String name,
+    required String? fileExtension,
     required String mimeType,
   }) async {
     final window = js.globalContext;
 
-    final fileExtension = name.split('.').lastOrNull;
-    if (fileExtension == null) {
-      throw FlutterFileManagerWebException('Missing file extension.');
-    }
-
-    final options = {
-      'suggestedName': name,
-      'types': [
-        {
-          'description': 'Selected File',
-          'accept': {
-            mimeType: ['.$fileExtension'],
-          },
-        },
-      ],
-    }.toJSBox;
-
     try {
-      final fileHandle = await window.callMethodVarArgs<js.JSPromise>(
-        'showSaveFilePicker'.toJS,
-        [options],
-      ).toDart;
+      final fileHandle = await showSaveFilePicker(
+        window,
+        options: SaveFilePickerOptions(
+          suggestedName: name,
+          types: [
+            if (fileExtension case final fileExtension?)
+              FilePickerType(
+                accept: {
+                  mimeType: ['.$fileExtension'],
+                },
+              ),
+          ],
+        ),
+      );
 
-      print('RESULT: $fileHandle');
+      final writable = await createWritable(fileHandle);
+      await writable.callMethod<js.JSPromise>('close'.toJS).toDart;
     } on web.DOMException catch (e) {
       // Convert an abort error to a custom exception.
       if (e case web.DOMException(code: 20, name: 'AbortError')) {
@@ -105,13 +112,4 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     final window = js.globalContext;
     return window.hasProperty('showSaveFilePicker'.toJS).toDart;
   }
-}
-
-class FlutterFileManagerWebException implements Exception {
-  const FlutterFileManagerWebException(this.message);
-
-  final String message;
-
-  @override
-  String toString() => 'FlutterFileManagerWebException: $message';
 }
