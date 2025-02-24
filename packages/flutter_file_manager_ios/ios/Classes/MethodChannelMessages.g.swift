@@ -84,9 +84,10 @@ class MethodChannelMessagesPigeonCodec: FlutterStandardMessageCodec, @unchecked 
   static let shared = MethodChannelMessagesPigeonCodec(readerWriter: MethodChannelMessagesPigeonCodecReaderWriter())
 }
 
+
 /// Generated protocol from Pigeon that represents a handler of messages from Flutter.
 protocol IOSMessageApi {
-  func writeFile(fileName: String, bytes: FlutterStandardTypedData) throws -> String
+  func writeFile(fileName: String, bytes: FlutterStandardTypedData, completion: @escaping (Result<String, Error>) -> Void)
 }
 
 /// Generated setup class from Pigeon to handle messages through the `binaryMessenger`.
@@ -101,11 +102,13 @@ class IOSMessageApiSetup {
         let args = message as! [Any?]
         let fileNameArg = args[0] as! String
         let bytesArg = args[1] as! FlutterStandardTypedData
-        do {
-          let result = try api.writeFile(fileName: fileNameArg, bytes: bytesArg)
-          reply(wrapResult(result))
-        } catch {
-          reply(wrapError(error))
+        api.writeFile(fileName: fileNameArg, bytes: bytesArg) { result in
+          switch result {
+          case .success(let res):
+            reply(wrapResult(res))
+          case .failure(let error):
+            reply(wrapError(error))
+          }
         }
       }
     } else {

@@ -9,6 +9,7 @@ import 'package:pigeon/pigeon.dart';
 )
 @HostApi()
 abstract class IOSMessageApi {
+  @async
   String writeFile({
     required String fileName,
     required Uint8List bytes,
