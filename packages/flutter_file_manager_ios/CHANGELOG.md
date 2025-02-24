@@ -1,7 +1,8 @@
 ## 2.1.0
 
 * Bumped `flutter_file_manager_platform_interface` to `2.1.0`
-* Refactor the code using [pigeon](https://pub.dev/packages/pigeon) to communicate with the native code
+* Removed dependency on `path_provider`
+* Refactor the code using [pigeon](https://pub.dev/packages/pigeon) to communicate with the native code and use a `UIDocumentPickerViewController` to save the file
 
 ## 2.0.0
 
