@@ -12,6 +12,12 @@ Interface to provide a way to save files on the device in Flutter.
 | `writeFileAsBytes` | ✅ | ✅ | ✅  | ❌️ | ❌️ | ✅ |
 | `writeFileAsString` | ✅ | ✅ | ✅  | ❌️ | ❌️ | ✅ |
 
+Under the hood, each implementation tries to use the native dialog to save the file:
+- Android: [`ACTION_CREATE_DOCUMENT` intent](https://developer.android.com/reference/android/content/Intent#ACTION_CREATE_DOCUMENT) is used
+- iOS: [`UIDocumentPickerViewController`](https://developer.apple.com/documentation/uikit/uidocumentpickerviewcontroller) is used
+- MacOS: [`NSSavePanel`](https://developer.apple.com/documentation/appkit/nssavepanel) is used
+- Web: It will try to use the [`showSaveFilePicker` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/showSaveFilePicker) if available, otherwise it will try to use the `download` attribute on an anchor tag
+
 ## Getting Started
 
 ### Import the package
@@ -38,7 +44,7 @@ android {
 </details>
 
 <details>
-<summary>iOS Setup</summary>
+<summary>iOS Setup (Needs iOS 16+)</summary>
 
 Add the following permissions to your `ios/Runner/Info.plist`:
 

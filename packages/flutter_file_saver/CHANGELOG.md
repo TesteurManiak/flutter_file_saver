@@ -1,3 +1,14 @@
+## 0.8.0
+
+* Updated documentation
+* Use native dialog on all supported platforms
+* Bumped dependencies:
+    * `flutter_file_manager_android` to `2.1.0`
+    * `flutter_file_manager_ios` to `2.1.0`
+    * `flutter_file_manager_macos` to `2.1.0`
+    * `flutter_file_manager_platform_interface` to `2.1.0`
+    * `flutter_file_manager_web` to `2.1.0`
+
 ## 0.7.0
 
 * Bumped Dart SDK to `3.4.0` and Flutter SDK to `3.22.0`
