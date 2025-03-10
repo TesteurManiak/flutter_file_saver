@@ -2,6 +2,7 @@ library;
 
 import 'dart:js_interop' as js;
 import 'dart:js_interop_unsafe';
+import 'dart:typed_data';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_file_manager_platform_interface/flutter_file_manager_platform_interface.dart';
@@ -96,6 +97,7 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
       );
 
       final writable = await createWritable(fileHandle);
+      await writable.callMethod<js.JSPromise>('write'.toJS, bytes.toJS).toDart;
       await writable.callMethod<js.JSPromise>('close'.toJS).toDart;
     } on web.DOMException catch (e) {
       // Convert an abort error to a custom exception.
