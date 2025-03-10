@@ -25,20 +25,20 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     required Uint8List bytes,
   }) async {
     final splittedName = fileName.split('.');
-    final name = splittedName[0];
+    final fileExtension = splittedName.length > 1 ? splittedName.last : null;
     final mimeType = lookupMimeType(fileName) ?? 'application/octet-stream';
 
     if (_isFileSystemAccessAPIAvailable()) {
       await _showSaveFilePicker(
         bytes: bytes,
-        name: name,
-        fileExtension: splittedName.length > 1 ? splittedName[1] : null,
+        name: fileName,
+        fileExtension: fileExtension,
         mimeType: mimeType,
       );
       return '';
     }
 
-    await _downloadFile(bytes: bytes, name: name, mimeType: mimeType);
+    await _downloadFile(bytes: bytes, name: fileName, mimeType: mimeType);
     return '';
   }
 
