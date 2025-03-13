@@ -1,3 +1,11 @@
+## 2.1.1
+
+* Preserve file extension in filename on web download by @pathconnected in https://github.com/TesteurManiak/flutter_file_saver/pull/15
+* Write data on the web writer by @pathconnected in https://github.com/TesteurManiak/flutter_file_saver/pull/14
+
+## New Contributors
+* @pathconnected made their first contribution in https://github.com/TesteurManiak/flutter_file_saver/pull/15
+
 ## 2.1.0
 
 * Bumped `flutter_file_manager_platform_interface` to `2.1.0`
