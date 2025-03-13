@@ -1,3 +1,12 @@
+## 0.8.1
+
+* Bump `flutter_file_manager_web` to `2.1.1`
+
+## New Contributors
+* @pathconnected made their first contribution in https://github.com/TesteurManiak/flutter_file_saver/pull/15
+
+**Full Changelog**: https://github.com/TesteurManiak/flutter_file_saver/compare/0.8.0...0.8.1
+
 ## 0.8.0
 
 * Updated documentation
