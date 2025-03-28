@@ -1,5 +1,7 @@
 import 'dart:js_interop' as js;
 
+import '../flutter_file_manager_web.dart';
+
 @js.JS('window.showSaveFilePicker')
 external js.JSPromise<js.JSAny?> _showSaveFilePicker(js.JSAny? options);
 
@@ -10,7 +12,7 @@ Future<js.JSObject> showSaveFilePicker([
       await _showSaveFilePicker(options?.toJson().jsify()).toDart;
 
   if (fileHandle == null || !fileHandle.isA<js.JSObject>()) {
-    throw Exception('File handle is null.');
+    throw FlutterFileManagerWebException('File handle is null.');
   }
 
   return fileHandle as js.JSObject;
