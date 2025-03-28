@@ -1,13 +1,14 @@
 import 'dart:js_interop' as js;
 import 'dart:js_interop_unsafe';
 
+import 'package:web/web.dart' as web;
+
 import 'exceptions.dart';
 
-Future<js.JSObject> showSaveFilePicker(
-  js.JSObject window, {
+Future<js.JSObject> showSaveFilePicker([
   SaveFilePickerOptions? options,
-}) async {
-  final fileHandle = await window
+]) async {
+  final fileHandle = await web.window
       .callMethod<js.JSPromise>(
         'showSaveFilePicker'.toJS,
         options?.toJson().jsify(),

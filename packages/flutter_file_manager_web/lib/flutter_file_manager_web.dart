@@ -78,12 +78,9 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     required String? fileExtension,
     required String mimeType,
   }) async {
-    final window = js.globalContext;
-
     try {
       final fileHandle = await showSaveFilePicker(
-        window,
-        options: SaveFilePickerOptions(
+        SaveFilePickerOptions(
           suggestedName: name,
           types: [
             if (fileExtension case final fileExtension?)
@@ -109,9 +106,7 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
   }
 
   /// Check the availability of the File System Access API by checking if the
-  /// `showSaveFilePicker` method is available in the global context.
-  bool _isFileSystemAccessAPIAvailable() {
-    final window = js.globalContext;
-    return window.hasProperty('showSaveFilePicker'.toJS).toDart;
-  }
+  /// `showSaveFilePicker` method is available.
+  bool _isFileSystemAccessAPIAvailable() =>
+      web.window.hasProperty('showSaveFilePicker'.toJS).toDart;
 }
