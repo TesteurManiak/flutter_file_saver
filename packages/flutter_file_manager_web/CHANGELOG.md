@@ -1,3 +1,8 @@
+## 2.2.0
+
+* Refactor `showSaveFilePicker` APIs to use typesafe JS interop
+* Bump `web` dependency to `1.1.1`
+
 ## 2.1.1
 
 * Preserve file extension in filename on web download by @pathconnected in https://github.com/TesteurManiak/flutter_file_saver/pull/15
