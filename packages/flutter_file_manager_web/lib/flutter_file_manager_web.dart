@@ -11,7 +11,6 @@ import 'package:mime/mime.dart';
 import 'package:web/web.dart' as web;
 
 import 'src/save_file_picker.dart';
-import 'src/writable.dart';
 
 export 'src/exceptions.dart';
 
@@ -78,12 +77,9 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
     required String? fileExtension,
     required String mimeType,
   }) async {
-    final window = js.globalContext;
-
     try {
       final fileHandle = await showSaveFilePicker(
-        window,
-        options: SaveFilePickerOptions(
+        SaveFilePickerOptions(
           suggestedName: name,
           types: [
             if (fileExtension case final fileExtension?)
@@ -96,9 +92,9 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
         ),
       );
 
-      final writable = await createWritable(fileHandle);
-      await writable.callMethod<js.JSPromise>('write'.toJS, bytes.toJS).toDart;
-      await writable.callMethod<js.JSPromise>('close'.toJS).toDart;
+      final writable = await fileHandle.createWritable();
+      await writable?.write(bytes);
+      await writable?.close();
     } on web.DOMException catch (e) {
       // Convert an abort error to a custom exception.
       if (e case web.DOMException(code: 20, name: 'AbortError')) {
@@ -109,9 +105,7 @@ class FlutterFileManagerWeb extends FileManagerPlatform {
   }
 
   /// Check the availability of the File System Access API by checking if the
-  /// `showSaveFilePicker` method is available in the global context.
-  bool _isFileSystemAccessAPIAvailable() {
-    final window = js.globalContext;
-    return window.hasProperty('showSaveFilePicker'.toJS).toDart;
-  }
+  /// `showSaveFilePicker` method is available.
+  bool _isFileSystemAccessAPIAvailable() =>
+      web.window.hasProperty('showSaveFilePicker'.toJS).toDart;
 }

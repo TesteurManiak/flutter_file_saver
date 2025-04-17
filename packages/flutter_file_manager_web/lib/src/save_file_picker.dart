@@ -1,24 +1,47 @@
 import 'dart:js_interop' as js;
-import 'dart:js_interop_unsafe';
 
-import 'exceptions.dart';
+import '../flutter_file_manager_web.dart';
+import 'js_bindings/file_system_handle.dart';
 
-Future<js.JSObject> showSaveFilePicker(
-  js.JSObject window, {
+@js.JS('window.showSaveFilePicker')
+external js.JSPromise<JSFileSystemFileHandle?> _showSaveFilePicker(
+  JSSaveFilePickerOptions? options,
+);
+
+@js.JS()
+extension type JSSaveFilePickerOptions._(js.JSObject _) implements js.JSObject {
+  external bool? get excludeAcceptAllOption;
+  external set excludeAcceptAllOption(bool? value);
+
+  external String? get id;
+  external set id(String? value);
+
+  external String? get suggestedName;
+  external set suggestedName(String? value);
+
+  external js.JSArray<JSFilePickerType>? get types;
+  external set types(js.JSArray<JSFilePickerType>? value);
+}
+
+@js.JS()
+extension type JSFilePickerType._(js.JSObject _) implements js.JSObject {
+  external String? get description;
+  external set description(String? value);
+
+  external js.JSAny? get accept;
+  external set accept(js.JSAny? value);
+}
+
+Future<JSFileSystemFileHandle> showSaveFilePicker([
   SaveFilePickerOptions? options,
-}) async {
-  final fileHandle = await window
-      .callMethod<js.JSPromise>(
-        'showSaveFilePicker'.toJS,
-        options?.toJson().jsify(),
-      )
-      .toDart;
+]) async {
+  final fileHandle = await _showSaveFilePicker(options?.toJS).toDart;
 
-  if (fileHandle == null || !fileHandle.isA<js.JSObject>()) {
+  if (fileHandle == null) {
     throw FlutterFileManagerWebException('File handle is null.');
   }
 
-  return fileHandle as js.JSObject;
+  return fileHandle;
 }
 
 class SaveFilePickerOptions {
@@ -29,31 +52,17 @@ class SaveFilePickerOptions {
     this.types,
   });
 
-  /// A boolean value that defaults to false. By default, the picker should
-  /// include an option to not apply any file type filters (instigated with the
-  /// type option below). Setting this option to true means that option is not
-  /// available.
   final bool excludeAcceptAllOption;
-
-  /// By specifying an ID, the browser can remember different directories for
-  /// different IDs. If the same ID is used for another picker, the picker opens
-  /// in the same directory.
   final String? id;
-
-  /// The suggested file name.
   final String? suggestedName;
-
-  /// An Array of allowed file types to save.
   final List<FilePickerType>? types;
 
-  Map<String, Object> toJson() {
-    return {
-      'excludeAcceptAllOption': excludeAcceptAllOption,
-      if (id case final id?) 'id': id,
-      if (suggestedName case final name?) 'suggestedName': name,
-      if (types case final types? when types.isNotEmpty)
-        'types': types.map((e) => e.toJson()).toList(),
-    };
+  JSSaveFilePickerOptions get toJS {
+    return JSSaveFilePickerOptions._(js.JSObject())
+      ..excludeAcceptAllOption = excludeAcceptAllOption
+      ..id = id
+      ..suggestedName = suggestedName
+      ..types = types?.map((e) => e.toJS).toList().toJS;
   }
 }
 
@@ -63,18 +72,12 @@ class FilePickerType {
     this.description = '',
   }) : assert(accept.length > 0);
 
-  /// An optional description of the category of files types allowed. Default to
-  /// be an empty string.
   final String description;
-
-  /// A map with the keys set to the MIME type and the values an Array of file
-  /// extensions.
   final Map<String, List<String>> accept;
 
-  Map<String, Object> toJson() {
-    return {
-      'description': description,
-      'accept': accept,
-    };
+  JSFilePickerType get toJS {
+    return JSFilePickerType._(js.JSObject())
+      ..description = description
+      ..accept = accept.jsify();
   }
 }
