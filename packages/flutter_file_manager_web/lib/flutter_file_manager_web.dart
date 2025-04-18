@@ -15,6 +15,7 @@ import 'src/save_file_picker.dart';
 export 'src/exceptions.dart';
 
 class FlutterFileManagerWeb extends FileManagerPlatform {
+  @pragma('vm:entry-point')
   static void registerWith(Registrar registrar) {
     FileManagerPlatform.instance = FlutterFileManagerWeb();
   }

@@ -34,5 +34,6 @@ flutter:
         default_package: flutter_file_manager_ios
       web:
         default_package: flutter_file_manager_web
+        pluginClass: FlutterFileManagerWeb
       macos:
         default_package: flutter_file_manager_macos
