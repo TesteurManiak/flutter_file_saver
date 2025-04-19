@@ -1,6 +1,7 @@
 ## 2.2.0
 
-* Refactor `showSaveFilePicker` APIs to use typesafe JS interop
+* Implement typesafe JS interop by @TesteurManiak in https://github.com/TesteurManiak/flutter_file_saver/pull/18
+* 19 web release mode issue by @TesteurManiak in https://github.com/TesteurManiak/flutter_file_saver/pull/20
 * Bump `web` dependency to `1.1.1`
 
 ## 2.1.1
