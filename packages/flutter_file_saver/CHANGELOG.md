@@ -1,3 +1,7 @@
+## 0.9.0
+
+* Bumped `flutter_file_manager_android` to `2.2.0`
+
 ## 0.8.1
 
 * Bump `flutter_file_manager_web` to `2.1.1`
