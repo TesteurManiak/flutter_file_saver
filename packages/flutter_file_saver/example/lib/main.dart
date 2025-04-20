@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:typed_data';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_file_saver/flutter_file_saver.dart';
 
@@ -34,14 +35,6 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        actions: [
-          Switch(
-            value: _twoPhaseSaveEnabled,
-            onChanged: (v) => setState(() => _twoPhaseSaveEnabled = v),
-          ),
-        ],
-      ),
       body: Center(
         child: Form(
           key: _formKey,
@@ -68,6 +61,13 @@ class _MyHomePageState extends State<MyHomePage> {
                       : 'File content is required',
                   onSaved: (val) => _fileContent = val,
                 ),
+                SwitchListTile(
+                  value: _twoPhaseSaveEnabled,
+                  title: const Text('Two phase save'),
+                  onChanged: !_isLoading
+                      ? (v) => setState(() => _twoPhaseSaveEnabled = v)
+                      : null,
+                ),
               ],
             ),
           ),
@@ -75,9 +75,11 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: _isLoading ? null : _downloadFile,
-        label: const Text('Download'),
+        label: Text(
+          _isLoading && _twoPhaseSaveEnabled ? 'Preparing file' : 'Download',
+        ),
         icon: _isLoading
-            ? const CircularProgressIndicator()
+            ? const CupertinoActivityIndicator()
             : const Icon(Icons.download),
       ),
     );
@@ -96,13 +98,14 @@ class _MyHomePageState extends State<MyHomePage> {
           await Future.delayed(const Duration(seconds: 10));
           if (!mounted) return;
 
-          await showDialog(
+          final cancelled = await showDialog(
             context: context,
             builder: (_) => DownloadDialog(
               fileName: _fileName!,
               bytes: Uint8List.fromList(_fileContent!.codeUnits),
             ),
-          );
+          ).then((v) => v ?? false);
+          if (cancelled) throw FileSaverCancelledException();
         } else {
           path = await _fileSaverPlugin.writeFileAsString(
             fileName: _fileName!,
@@ -150,19 +153,19 @@ class DownloadDialog extends StatelessWidget {
           onPressed: () async {
             try {
               await FlutterFileSaver().writeFileAsBytes(
-                fileName: 'test.txt',
+                fileName: fileName,
                 bytes: bytes,
               );
             } catch (e) {
               rethrow;
             } finally {
-              if (context.mounted) Navigator.pop(context);
+              if (context.mounted) Navigator.pop(context, false);
             }
           },
           child: const Text('Download'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context),
+          onPressed: () => Navigator.pop(context, true),
           child: const Text('Cancel'),
         ),
       ],
