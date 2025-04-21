@@ -24,20 +24,20 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _fileSaverPlugin = FlutterFileSaver();
-  final _formKey = GlobalKey<FormState>();
+  final fileSaverPlugin = FlutterFileSaver();
+  final formKey = GlobalKey<FormState>();
 
-  String? _fileName;
-  String? _fileContent;
-  bool _twoPhaseSaveEnabled = false;
-  bool _isLoading = false;
+  String? fileName;
+  String? fileContent;
+  bool twoPhaseSaveEnabled = false;
+  bool isLoading = false;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
         child: Form(
-          key: _formKey,
+          key: formKey,
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -45,27 +45,27 @@ class _MyHomePageState extends State<MyHomePage> {
               children: <Widget>[
                 TextFormField(
                   initialValue: 'test.txt',
-                  enabled: !_isLoading,
+                  enabled: !isLoading,
                   decoration: const InputDecoration(labelText: 'File name'),
                   validator: (value) => value != null && value.isNotEmpty
                       ? null
                       : 'File name is required',
-                  onSaved: (val) => _fileName = val,
+                  onSaved: (val) => fileName = val,
                 ),
                 TextFormField(
                   initialValue: 'test',
-                  enabled: !_isLoading,
+                  enabled: !isLoading,
                   decoration: const InputDecoration(labelText: 'File content'),
                   validator: (value) => value != null && value.isNotEmpty
                       ? null
                       : 'File content is required',
-                  onSaved: (val) => _fileContent = val,
+                  onSaved: (val) => fileContent = val,
                 ),
                 SwitchListTile(
-                  value: _twoPhaseSaveEnabled,
+                  value: twoPhaseSaveEnabled,
                   title: const Text('Two phase save'),
-                  onChanged: !_isLoading
-                      ? (v) => setState(() => _twoPhaseSaveEnabled = v)
+                  onChanged: !isLoading
+                      ? (v) => setState(() => twoPhaseSaveEnabled = v)
                       : null,
                 ),
               ],
@@ -74,11 +74,11 @@ class _MyHomePageState extends State<MyHomePage> {
         ),
       ),
       floatingActionButton: FloatingActionButton.extended(
-        onPressed: _isLoading ? null : _downloadFile,
+        onPressed: isLoading ? null : _downloadFile,
         label: Text(
-          _isLoading && _twoPhaseSaveEnabled ? 'Preparing file' : 'Download',
+          isLoading && twoPhaseSaveEnabled ? 'Preparing file' : 'Download',
         ),
-        icon: _isLoading
+        icon: isLoading
             ? const CupertinoActivityIndicator()
             : const Icon(Icons.download),
       ),
@@ -86,30 +86,30 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 
   Future<void> _downloadFile() async {
-    final formState = _formKey.currentState!;
+    final formState = formKey.currentState!;
     if (formState.validate()) {
       formState.save();
 
-      setState(() => _isLoading = true);
+      setState(() => isLoading = true);
 
       try {
         String? path;
-        if (_twoPhaseSaveEnabled) {
+        if (twoPhaseSaveEnabled) {
           await Future.delayed(const Duration(seconds: 10));
           if (!mounted) return;
 
-          final cancelled = await showDialog(
+          final error = await showDialog<Object?>(
             context: context,
             builder: (_) => DownloadDialog(
-              fileName: _fileName!,
-              bytes: Uint8List.fromList(_fileContent!.codeUnits),
+              fileName: fileName!,
+              bytes: Uint8List.fromList(fileContent!.codeUnits),
             ),
-          ).then((v) => v ?? false);
-          if (cancelled) throw FileSaverCancelledException();
+          );
+          if (error != null) throw error;
         } else {
-          path = await _fileSaverPlugin.writeFileAsString(
-            fileName: _fileName!,
-            data: _fileContent!,
+          path = await fileSaverPlugin.writeFileAsString(
+            fileName: fileName!,
+            data: fileContent!,
           );
         }
 
@@ -127,7 +127,7 @@ class _MyHomePageState extends State<MyHomePage> {
           const SnackBar(content: Text('Save cancelled')),
         );
       } finally {
-        if (mounted) setState(() => _isLoading = false);
+        if (mounted) setState(() => isLoading = false);
       }
     }
   }
@@ -151,21 +151,22 @@ class DownloadDialog extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: () async {
+            Object? error;
             try {
               await FlutterFileSaver().writeFileAsBytes(
                 fileName: fileName,
                 bytes: bytes,
               );
             } catch (e) {
-              rethrow;
+              error = e;
             } finally {
-              if (context.mounted) Navigator.pop(context, false);
+              if (context.mounted) Navigator.pop(context, error);
             }
           },
           child: const Text('Download'),
         ),
         TextButton(
-          onPressed: () => Navigator.pop(context, true),
+          onPressed: () => Navigator.pop(context),
           child: const Text('Cancel'),
         ),
       ],
