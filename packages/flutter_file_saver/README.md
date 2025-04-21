@@ -96,3 +96,64 @@ FlutterFileSaver().writeFileAsString(
     string: 'Hello World!',
 );
 ```
+
+## Known Issues
+
+### Web - `SecurityError: Failed to execute 'showSaveFilePicker' on 'Window'`
+
+This is a known issue with the `showSaveFilePicker` JavaScript API on the Web. It is caused when `writeFileAsBytes`/`writeFileAsString` is not immediately called after a user interaction (like a button click). This is a security feature of the browser to prevent malicious sites from opening file pickers without user consent.
+
+```dart
+ElevatedButton(
+    onPressed: () async {
+        final bytes = await compressFile();
+
+        // Might throw a SecurityError if compressFile() has taken too long to execute.
+        FlutterFileSaver().writeFileAsBytes(bytes: bytes, fileName: myFileName);
+    },
+    child: const Text('Save File'),
+),
+```
+
+The fix is to call `writeFileAsBytes`/`writeFileAsString` immediately after a user interaction. For example, by having a two-phase save flow with a button specifically made to save the file:
+
+```dart
+ElevatedButton(
+    onPressed: () async {
+        // 1st phase: compress the file
+        final bytes = await compressFile();
+
+        if (!context.mounted) return;
+        // 2nd phase: show a dialog to save the file
+        showDialog(context: context, builder: (_) => DownloadDialog(bytes: bytes, fileName: myFileName));
+    },
+    child: const Text('Save File'),
+),
+
+
+class DownloadDialog extends StatelessWidget {
+    const DownloadDialog({super.key, required this.bytes, required this.fileName});
+
+    final Uint8List bytes;
+    final String fileName;
+
+    @override
+    Widget build(BuildContext context) {
+        return AlertDialog(
+            title: const Text('Save File'),
+            content: const Text('Do you want to save the file?'),
+            actions: [
+                TextButton(
+                    onPressed: () {
+                        // Will work because it is called immediately after a user interaction.
+                        FlutterFileSaver().writeFileAsBytes(bytes: bytes, fileName: fileName);
+                        Navigator.pop(context);
+                    },
+                    child: const Text('Save'),
+                ),
+            ],
+        );
+    }
+}
+
+```
