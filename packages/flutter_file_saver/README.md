@@ -155,5 +155,6 @@ class DownloadDialog extends StatelessWidget {
         );
     }
 }
-
 ```
+
+Check the [example](https://github.com/TesteurManiak/flutter_file_saver/blob/main/packages/flutter_file_saver/example/lib/main.dart#L98)
