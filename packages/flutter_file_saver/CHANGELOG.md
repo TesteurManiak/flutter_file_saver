@@ -1,3 +1,7 @@
+## 0.9.0+1
+
+* Updated documentation
+
 ## 0.9.0
 
 * Bumped `flutter_file_manager_android` to `2.2.0`
