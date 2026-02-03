@@ -1,12 +1,12 @@
 name: flutter_file_manager_platform_interface
 description: A common platform interface for the flutter_file_manager plugin.
-version: 2.1.0
+version: 2.1.1
 homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/packages/flutter_file_manager_platform_interface
 issue_tracker: https://github.com/TesteurManiak/flutter_file_saver/issues
 
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
   flutter: ">=3.22.0"
 
 dependencies:
@@ -15,4 +15,4 @@ dependencies:
   plugin_platform_interface: ^2.1.8
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
