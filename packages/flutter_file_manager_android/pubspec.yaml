@@ -5,7 +5,7 @@ homepage: https://github.com/TesteurManiak/flutter_file_saver
 repository: https://github.com/TesteurManiak/flutter_file_saver/tree/main/packages/flutter_file_manager_android
 issue_tracker: https://github.com/TesteurManiak/flutter_file_saver/issues?q=is%3Aissue+is%3Aopen+label%3Aandroid
 environment:
-  sdk: ">=3.4.0 <4.0.0"
+  sdk: ">=3.10.0 <4.0.0"
   flutter: ">=3.22.0"
 
 dependencies:
@@ -15,10 +15,10 @@ dependencies:
   mime: ^2.0.0
 
 dev_dependencies:
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
-  pigeon: ^24.2.1
+  pigeon: ^25.5.0
 
 flutter:
   plugin:
