@@ -25,13 +25,6 @@ dev_dependencies:
   mocktail: ^1.0.4
   plugin_platform_interface: ^2.1.8
 
-dependency_overrides:
-  flutter_file_manager_android:
-    git:
-      url: https://github.com/arxdeus/flutter_file_saver.git
-      ref: main
-      path: packages/flutter_file_manager_android
-
 flutter:
   plugin:
     platforms:
