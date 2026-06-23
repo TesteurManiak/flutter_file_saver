@@ -20,4 +20,3 @@ scripts:
     packageFilters:
       dirExists:
         - test
-sdkPath: .fvm/flutter_sdk
