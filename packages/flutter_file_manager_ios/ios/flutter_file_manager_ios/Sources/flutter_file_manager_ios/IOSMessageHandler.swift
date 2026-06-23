@@ -5,6 +5,9 @@
 //  Created by Guillaume Roux on 24/02/2025.
 //
 
+import Flutter
+import UIKit
+
 @available(iOS 16.0, *)
 class IOSMessageHandler : NSObject, IOSMessageApi, UIDocumentPickerDelegate {
     var completionHandler: ((Result<String, any Error>) -> Void)?
