@@ -1,5 +1,3 @@
-// ignore_for_file: invalid_runtime_check_with_js_interop_types
-
 library;
 
 import 'dart:js_interop' as js;
