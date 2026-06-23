@@ -1,3 +1,8 @@
+## 1.0.0
+
+* Bumped `flutter_file_manager_android` to `3.0.0` (migrates Android to built-in Kotlin).
+* Updates minimum supported SDK version to Flutter 3.44/Dart 3.12.
+
 ## 0.9.0+1
 
 * Updated documentation
