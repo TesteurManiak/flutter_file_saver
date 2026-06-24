@@ -22,7 +22,6 @@ analyzer:
     use_decorated_box: warning
     use_string_buffers: warning
     avoid_unnecessary_containers: warning
-    use_if_null_to_convert_nulls_to_bools: warning
 
 linter:
   rules:
