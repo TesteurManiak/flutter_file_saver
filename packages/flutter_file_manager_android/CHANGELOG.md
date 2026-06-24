@@ -1,9 +1,13 @@
 ## 3.0.0
 
 * Updates minimum supported SDK version to Flutter 3.44/Dart 3.12.
-* Migrates to built-in Kotlin (removes `kotlin-android` Gradle plugin).
+* Migrates to built-in Kotlin (removes `kotlin-android` Gradle plugin and
+  `kotlin-gradle-plugin` buildscript classpath); uses
+  `kotlin { compilerOptions { jvmTarget } }` block.
+* Adds support for Android Gradle Plugin 9.x.
 * Converts Android Gradle files to Kotlin DSL (`.gradle.kts`).
-* Updates Gradle to 9.1.0, AGP to 9.0.1, Kotlin to 2.3.20, `compileSdk` to 36.
+* Updates Gradle to 9.1.0, AGP to 9.0.1, Kotlin to 2.3.20, `compileSdk` to 36,
+  `jvmTarget` to 17.
 
 ## 2.1.0
 
