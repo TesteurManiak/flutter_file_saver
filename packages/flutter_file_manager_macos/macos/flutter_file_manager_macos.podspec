@@ -14,10 +14,10 @@ MacOS platform implementation of flutter_file_saver.
   s.author           = { 'Your Company' => 'email@example.com' }
 
   s.source           = { :path => '.' }
-  s.source_files     = 'Classes/**/*'
+  s.source_files     = 'flutter_file_manager_macos/Sources/flutter_file_manager_macos/**/*.swift'
   s.dependency 'FlutterMacOS'
 
-  s.platform = :osx, '10.11'
+  s.platform = :osx, '10.14'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES' }
   s.swift_version = '5.0'
 end

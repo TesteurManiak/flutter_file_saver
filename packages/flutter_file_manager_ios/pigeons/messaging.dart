@@ -3,7 +3,8 @@ import 'package:pigeon/pigeon.dart';
 @ConfigurePigeon(
   PigeonOptions(
     dartOut: 'lib/src/gen/method_channel_messages.dart',
-    swiftOut: 'ios/Classes/MethodChannelMessages.g.swift',
+    swiftOut:
+        'ios/flutter_file_manager_ios/Sources/flutter_file_manager_ios/MethodChannelMessages.g.swift',
     dartPackageName: 'flutter_file_manager_ios',
   ),
 )

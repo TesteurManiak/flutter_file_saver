@@ -5,6 +5,7 @@
 //  Created by Guillaume Roux on 20/02/2025.
 //
 
+import AppKit
 import FlutterMacOS
 
 class MacOSMessageHandler: MacOSMessageApi {
