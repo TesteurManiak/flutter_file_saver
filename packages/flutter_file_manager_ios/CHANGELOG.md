@@ -1,6 +1,7 @@
 ## 3.0.0
 
 * Updates minimum supported SDK version to Flutter 3.44/Dart 3.12.
+* Added `meta: ^1.18.0` dependency
 * Migrates the iOS plugin from CocoaPods to Swift Package Manager (adds
   `Package.swift`; sources moved under `Sources/`). CocoaPods remains supported.
 * Removes the Objective-C registration wrapper; `FlutterFileManagerIosPlugin`
